@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DocumentManager.h"
 
 @interface MotivationAppDelegate : UIResponder <UIApplicationDelegate>
 
