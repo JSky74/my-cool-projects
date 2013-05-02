@@ -12,8 +12,6 @@
 
 
 + (UIManagedDocument *) useMotivationDocument;
-
-+ (void) closeDocument;
-
++ (BOOL) saveDocument:(UIManagedDocument *) document;
 
 @end

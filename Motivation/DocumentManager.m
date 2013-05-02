@@ -9,6 +9,9 @@
 #import "DocumentManager.h"
 #import <CoreData/CoreData.h>
 
+#define DOCUMENT_NAME @"MotivationDocument2"
+#define TRANSACTION_LOG @"Transactions2"
+
 @interface DocumentManager ()
 @end
 
@@ -21,10 +24,8 @@
     NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                          inDomains:NSUserDomainMask] lastObject];
     
-    url = [url URLByAppendingPathComponent:@"MotivationDocument"];
-    
+    url = [url URLByAppendingPathComponent:DOCUMENT_NAME];
     UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
-    
     
     if ([[NSFileManager defaultManager] ubiquityIdentityToken]) //user is signed to iCloud
     {
@@ -34,23 +35,19 @@
     
     
     
-    
     if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
         // create
-        
         [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                if(success) { NSLog(@"####ManagedDocument created sucessfully");
-                            }
+                if(success) { NSLog(@"####ManagedDocument created sucessfully");}
             }];
     } else if (document.documentState == UIDocumentStateClosed) {
         //open it
-        [document openWithCompletionHandler:^(BOOL success) {
-            if (success) {
-                NSLog(@"###ManagedDocument was closed, opened sucessfully");
-                //[DocumentManager moveDocumentToCloud:document];
-            
-            }
-            else  if (!success) { NSLog(@"###Failed to open a closed document");}
+            [document openWithCompletionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"###ManagedDocument was closed, opened sucessfully");
+                    //[DocumentManager moveDocumentToCloud:document];
+                }
+                    else  if (!success) { NSLog(@"###Failed to open a closed document");}
         }];
     }
     else if (document.documentState == UIDocumentStateInConflict)
@@ -60,44 +57,46 @@
     else if (document.documentState == UIDocumentStateSavingError)
     {
         NSLog(@"####ManagedDocument saving error!!!");
+    } else if (document.documentState == UIDocumentStateEditingDisabled)
+    {
+        NSLog(@"####ManagedDocument editing disabled!!!");
     }
     
     else
     { NSLog(@"Cannot open managed document, trying to use it");}
     
-    
-    
     return document;
 }
 
 
-+ (void) closeDocument
++ (BOOL) saveDocument:(UIManagedDocument *) document
 {
+    BOOL saved __block;
+    saved = NO;
     NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    url = [url URLByAppendingPathComponent:@"MotivationDocument"];
+    url = [url URLByAppendingPathComponent:DOCUMENT_NAME];
     
-    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
         NSLog(@"No document!");
-        }
-    if (document.documentState == UIDocumentStateClosed) {
-       /* NSLog(@"Document already closed, trying to save ...");
-        [document saveToURL:url forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-            if (success) {
-                NSLog(@"Saved for overwriting successfully!");
-            };
-        }];*/
-    } else {
-    
-    [document closeWithCompletionHandler:^(BOOL success) {
-    if (success){
-            NSLog(@"Document closed");}
-        else if (!success) {
-            NSLog(@"Failed to close the document");}
-        else NSLog(@"Something is wrong");
-    }];
+        exit(1);
     }
+    if (document.documentState == UIDocumentStateNormal) {
+         NSLog(@"Document is open/normal , trying to save ...");
+         [document saveToURL:url forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+         if (success) {
+         NSLog(@"Saved for overwriting successfully!");
+             saved = YES;
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"MyNotificationDocumentIsSaved" object:document];
+         } else if (!success) {
+             
+             saved = NO;
+             NSLog(@"Failed to save the document");
+             NSLog(@"Something is wrong");
+         }}];
+    }
+    
+    return saved;
 }
 
     //First two (migrate and mapping) are unrelated to iCloud, just migration schema
@@ -127,17 +126,17 @@
     
     [options setObject:documentName forKey:NSPersistentStoreUbiquitousContentNameKey];
     
-    //if (!sharedChangeLog) {
+    if (!sharedChangeLog) {
         NSURL *ubiquityURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        sharedChangeLog = [ubiquityURL URLByAppendingPathComponent:@"Trans"];
-    //}
-            
+        sharedChangeLog = [ubiquityURL URLByAppendingPathComponent:TRANSACTION_LOG];
+    }
+    
     [options setObject:sharedChangeLog forKey:NSPersistentStoreUbiquitousContentURLKey];
     
     [document setPersistentStoreOptions:options];
     
     //merge policy
-    [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+    [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy]; //??
     
     //This policy merges conflicts between the persistent store’s version of the object and the current in-memory version, giving priority to in-memory changes.
     

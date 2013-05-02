@@ -12,7 +12,6 @@
 
 @interface MotivationCVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
-@property (strong, nonatomic) NSManagedObjectContext *context;
 @property (strong, nonatomic) UIManagedDocument *document;
 @property (strong, nonatomic) NSMetadataQuery *iCloudQuery;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;

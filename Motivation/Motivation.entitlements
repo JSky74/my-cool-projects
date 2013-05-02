@@ -4,13 +4,11 @@
 <dict>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>$(TeamIdentifierPrefix)com.Jasko.Demirovic.Motivation</string>
+		<string>$(TeamIdentifierPrefix)com.JaskoDemirovic.MotivationApp</string>
 	</array>
-	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
-	<string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)JaskoDemirovic.Motivation</string>
+		<string>$(AppIdentifierPrefix)com.JaskoDemirovic.MotivationApp</string>
 	</array>
 </dict>
 </plist>

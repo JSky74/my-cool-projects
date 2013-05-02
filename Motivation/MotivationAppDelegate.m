@@ -91,7 +91,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
      
-    NSManagedObjectContext *mainThreadMOC = ((MotivationCVC *) self.window.rootViewController).context;
+    NSManagedObjectContext *mainThreadMOC = ((MotivationCVC *) self.window.rootViewController).document.managedObjectContext;
     [mainThreadMOC performBlock:^{
         if ([mainThreadMOC hasChanges]) {
             NSError *error = nil;

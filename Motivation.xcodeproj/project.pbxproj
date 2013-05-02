@@ -36,6 +36,7 @@
 		2C7C51F917088DD9001BB241 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C51F817088DD8001BB241 /* Colors.m */; };
 		2C7C51FF170B1002001BB241 /* ShowNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */; };
 		2C7C5201170C021B001BB241 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C5200170C021B001BB241 /* iPad.storyboard */; };
+		2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95DAEC1730D90C00D6E1CF /* Change log.m */; };
 		2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */; };
 		2CD727751718B099006D42D7 /* SmallTileBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727741718B099006D42D7 /* SmallTileBackground.png */; };
 		2CD727781718BE4A006D42D7 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD727771718BE4A006D42D7 /* Note.m */; };
@@ -62,6 +63,7 @@
 		2C1B5423169659930006D731 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2C1B5425169659930006D731 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2C1B5427169659930006D731 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2C41E930173160EA00839DEF /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Motivation.entitlements; sourceTree = "<group>"; };
 		2C58E80E171AFB5800B755CB /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2C59366D170F2AED0078BF0A /* CellLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellLabel.h; sourceTree = "<group>"; };
 		2C59366E170F2AED0078BF0A /* CellLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellLabel.m; sourceTree = "<group>"; };
@@ -88,6 +90,8 @@
 		2C7C51FD170B1002001BB241 /* ShowNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowNoteViewController.h; sourceTree = "<group>"; };
 		2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowNoteViewController.m; sourceTree = "<group>"; };
 		2C7C5200170C021B001BB241 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
+		2C95DAEB1730D90C00D6E1CF /* Change log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Change log.h"; sourceTree = "<group>"; };
+		2C95DAEC1730D90C00D6E1CF /* Change log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Change log.m"; sourceTree = "<group>"; };
 		2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryKeyboardView.h; sourceTree = "<group>"; };
 		2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessoryKeyboardView.m; sourceTree = "<group>"; };
 		2CD727741718B099006D42D7 /* SmallTileBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallTileBackground.png; sourceTree = "<group>"; };
@@ -98,7 +102,6 @@
 		2CD727811719DF5B006D42D7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 		2CD72789171A0143006D42D7 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		2CD7278A171A0143006D42D7 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		2CF1A954171B6BAC002A2446 /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Motivation.entitlements; sourceTree = "<group>"; };
 		2CFAFA171706F38500FB670E /* MotivationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotivationModel.xcdatamodel; sourceTree = "<group>"; };
 		2CFAFA1917072A9900FB670E /* NewNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewNoteViewController.h; sourceTree = "<group>"; };
 		2CFAFA1A17072A9900FB670E /* NewNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewNoteViewController.m; sourceTree = "<group>"; };
@@ -154,10 +157,13 @@
 		2C1B5417169659930006D731 /* Motivation */ = {
 			isa = PBXGroup;
 			children = (
+				2C41E930173160EA00839DEF /* Motivation.entitlements */,
 				2C7C5200170C021B001BB241 /* iPad.storyboard */,
 				2C58E80E171AFB5800B755CB /* iPhone.storyboard */,
 				2CFAFA2317074F3300FB670E /* DocumentManager.h */,
 				2CFAFA2417074F3300FB670E /* DocumentManager.m */,
+				2C95DAEB1730D90C00D6E1CF /* Change log.h */,
+				2C95DAEC1730D90C00D6E1CF /* Change log.m */,
 				2C7C51EF17083B43001BB241 /* MotivationCVC.h */,
 				2C7C51F017083B43001BB241 /* MotivationCVC.m */,
 				2CFAFA1917072A9900FB670E /* NewNoteViewController.h */,
@@ -179,7 +185,6 @@
 		2C1B5418169659930006D731 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2CF1A954171B6BAC002A2446 /* Motivation.entitlements */,
 				2C593694171091960078BF0A /* Note Images */,
 				2C1B5420169659930006D731 /* MotivationAppDelegate.h */,
 				2C1B5421169659930006D731 /* MotivationAppDelegate.m */,
@@ -356,6 +361,7 @@
 				2CD727781718BE4A006D42D7 /* Note.m in Sources */,
 				2CD7278B171A0143006D42D7 /* Settings.m in Sources */,
 				2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */,
+				2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

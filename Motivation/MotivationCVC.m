@@ -138,7 +138,7 @@
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
     request.predicate = [NSPredicate predicateWithFormat:@"date IN %@", dateArray];
     NSError *error = nil;
-    NSArray *arrayOfPhotosToArchive = [self.context executeFetchRequest:request error:&error];
+    NSArray *arrayOfPhotosToArchive = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         for (id note in arrayOfPhotosToArchive) {
             ((Note *)note).archived = [NSNumber numberWithBool:YES];
             //[self.context save:NULL];
@@ -202,57 +202,52 @@
 }
 
 
+
+
+
+
 #pragma mark  ------------------ data manipulation -------------------------------
-
-
 
 
 -(void) dataImported:(NSNotification *)notification
 {
     NSLog(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
     NSLog(@"%@",notification);
-   [self.context mergeChangesFromContextDidSaveNotification:notification];
-
-   [self.context save:NULL];
-   //[self fetchNotes];
-   //[self.collectionView reloadData];
+    
+    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    
+    // possible solution
+    // if notification.userInfo is empty, send back a message and try to create again!
+    /*{
+	    deleted = "{(\n)}";
+	    inserted = "{(\n)}";
+	    updated = "{(\n)}";
+	}*/
+    
+    [self saveDocument]; // Save new version of the document in the persistent Store on Device
 }
-
 
 
 
 -(NSError *) fetchNotes
 {
     NSError *error = nil;
-    if (self.context)
+    if (self.document.managedObjectContext)
     {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
         request.predicate = [NSPredicate predicateWithFormat:@"archived == %@", [NSNumber numberWithBool:NO]];
-        self.arrayOfNotesFromCoreData = [self.context executeFetchRequest:request error:&error];
+        self.arrayOfNotesFromCoreData = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         
     }
    return error; 
 }
 
 
--(NSManagedObjectContext *) context
-{
-    if (!_context) {
-        if (_document) {
-            _context = self.document.managedObjectContext;
-        }
-        
-    }
-    return _context;
-}
-
-
-
 -(IBAction) dismissNote:(UIStoryboardSegue *) sender
 {
-    //[self fetchNotes];
-    //[self.collectionView reloadData];
+    [self fetchNotes];
+    [self.collectionView reloadData];
 }
 
 
@@ -262,25 +257,33 @@
         ShowNoteViewController *noteVC = sender.sourceViewController;
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
             noteVC.note.text = noteVC.changedText;
-            [self.context refreshObject:noteVC.note mergeChanges:YES];
-            [self fetchNotes];
-            [self.collectionView reloadData];
-        //}
-    } else {
-        NewNoteViewController *newNote = sender.sourceViewController;
-        [Note noteWithContent:newNote.typedText
+              }
+        else {
+            NewNoteViewController *newNote = sender.sourceViewController;
+            [Note noteWithContent:newNote.typedText
                         color:newNote.colorKey
                      archived:[NSNumber numberWithBool:NO]
-       inManagedObjectContext:self.context];
+           inManagedObjectContext:self.document.managedObjectContext];
     
-        [self.context save:NULL];
-        [self fetchNotes];
-        [self.collectionView reloadData];
-        // do this or RELOAD TABLE FOR correct sorting
-        //NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-        //NSArray *pathArray = [NSArray arrayWithObject:indexPath];
-        //[self.collectionView insertItemsAtIndexPaths:pathArray];
     }
+    
+    [self saveDocument];
+    
+
+}
+-(void)saveDocument
+{
+     [DocumentManager saveDocument:self.document];
+}
+
+
+
+-(void) updateUI:(NSNotification *)documentSaved
+{
+    [self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
+    [self fetchNotes];
+    [self.collectionView reloadData];
+    NSLog(@"UI updated");
 }
 
 
@@ -316,9 +319,13 @@
         NSLog (@"Removing the old version files in a separate thread");
         } else if (self.document.documentState & UIDocumentStateSavingError) {
             // try again?
-            NSLog(@"Unable to save document, saving error");
+            NSLog(@"Unable to save document, saving error trying again ...");
+            [self saveDocument];
+            
     }
 }
+
+
 
 
 -(void) applicationIsActiveAgain:(NSNotification *) notification
@@ -333,7 +340,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                                  object:self.context.persistentStoreCoordinator];
+                                                  object:self.document.managedObjectContext.persistentStoreCoordinator];
 }
 
 
@@ -390,20 +397,9 @@ for (int i = 0; i < resultCount; i++) {
     [self.iCloudQuery stopQuery];
 }
 
--(void) managedObjectContextDidSave:(NSNotification *)saveNotification
-{
-	NSManagedObjectContext *context = [saveNotification object];
-    [context performBlock:^{
-        // merging changes causes the fetched results controller to update its results
-        NSError *error = nil;
-        [self fetchNotes];
-        NSLog(@"NSManagedObjectContextDidSaveNotification %@", [error userInfo]);
-        
-        [self.collectionView reloadData];
-    }];
 
-    
-}
+
+
 
 -(void) managedObjectsDidChange:(NSNotification *)changeNotification
 {
@@ -416,7 +412,7 @@ for (int i = 0; i < resultCount; i++) {
 {
  [super viewDidLoad];
     
-    while (!self.context) {
+    while (!self.document.managedObjectContext) {
         NSLog(@"Document not ready");
     }
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -433,17 +429,17 @@ for (int i = 0; i < resultCount; i++) {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dataImported:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                               object:nil];
+                                               object:self.document.managedObjectContext.persistentStoreCoordinator];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(persistentStoreUpdated:)
                                                  name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                                               object:self.context.persistentStoreCoordinator];
+                                               object:self.context.persistentStoreCoordinator];*/
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:self.document.managedObjectContext];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
-    
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUI:) name:@"MyNotificationDocumentIsSaved" object:self.document];
     
     
     BOOL started = [self.iCloudQuery startQuery];
@@ -458,6 +454,8 @@ for (int i = 0; i < resultCount; i++) {
   self.collectionView.delegate = self;
   self.actionSheet.delegate  = self;
   self.trashButton.enabled = NO;
+  [self.document.managedObjectContext setStalenessInterval:0.0];
+  [self.document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
  
 }
 
@@ -499,6 +497,23 @@ for (int i = 0; i < resultCount; i++) {
     });
     
 }
+
+
+/*-(void) managedObjectContextDidSave:(NSNotification *)saveNotification
+ {
+ NSManagedObjectContext *context = [saveNotification object];
+ [context performBlock:^{
+ // merging changes causes the fetched results controller to update its results
+ NSError *error = nil;
+ 
+ [self fetchNotes]; //doing fetch cancels import somehow
+ NSLog(@"NSManagedObjectContextDidSaveNotification %@", [error userInfo]);
+ 
+ [self.collectionView reloadData];
+ }];
+ 
+ 
+ }*/
 
 
 @end
