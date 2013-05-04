@@ -14,8 +14,7 @@
 
 
 @property (strong, nonatomic) Note* note;
-@property (readonly, nonatomic) NSString *typedText;
-@property (readonly, nonatomic) NSString *colorKey;
+@property (readonly, nonatomic) NSString *changedText;
 
 - (IBAction)doneEditing:(id)sender;
 
