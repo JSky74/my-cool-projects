@@ -13,9 +13,10 @@
 @interface ShowNoteViewController ()
 
 @property (weak, nonatomic) IBOutlet      UITextView *noteTextView;
-@property (readwrite, nonatomic)            NSString *changedText;
+@property (readwrite, nonatomic)            NSString *typedText;
 @property (strong, nonatomic)                 Colors *colors;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *undoButton;
+@property (readwrite, nonatomic) NSString *colorKey;
 
 @end
 
@@ -23,6 +24,7 @@
 
 #define EMPTY_SPACE @"\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 #define LEADING_SPACE @"\n\n\n\n"
+
 
 - (IBAction)edit:(UIBarButtonItem *)sender {
     
@@ -54,6 +56,7 @@
     self.noteTextView.backgroundColor = [self.colors.noteColors objectForKey:self.note.color];
     self.noteTextView.font = [UIFont fontWithName:[[NSUserDefaults standardUserDefaults] stringForKey:@"font_preference"] size:17];
     self.noteTextView.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width ShowNotePointer:self];
+    [self setColorKey:self.note.color];
     
 }
 
@@ -102,7 +105,7 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self removeLeadingSpace];
-    self.changedText =  self.noteTextView.text;
+    self.typedText =  self.noteTextView.text;
 }
 
 

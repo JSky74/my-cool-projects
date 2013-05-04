@@ -9,8 +9,8 @@
 #import "DocumentManager.h"
 #import <CoreData/CoreData.h>
 
-#define DOCUMENT_NAME @"MotivationDocument2"
-#define TRANSACTION_LOG @"Transactions2"
+#define DOCUMENT_NAME @"MotivationDocument"
+#define TRANSACTION_LOG @"Transactions"
 
 @interface DocumentManager ()
 @end
@@ -136,7 +136,7 @@
     [document setPersistentStoreOptions:options];
     
     //merge policy
-    [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy]; //??
+    [document.managedObjectContext setMergePolicy:NSOverwriteMergePolicy]; //??
     
     //This policy merges conflicts between the persistent store’s version of the object and the current in-memory version, giving priority to in-memory changes.
     
