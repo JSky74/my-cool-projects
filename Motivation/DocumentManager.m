@@ -9,8 +9,8 @@
 #import "DocumentManager.h"
 #import <CoreData/CoreData.h>
 
-#define DOCUMENT_NAME @"MotivationDocument1"
-#define TRANSACTION_LOG @"Transactions1"
+#define DOCUMENT_NAME @"MotivationDocument2"
+#define TRANSACTION_LOG @"Transactions2"
 
 @interface DocumentManager ()
 @end

@@ -95,7 +95,7 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
 
 {
-    NSMutableArray *notesToDelete = [[NSMutableArray alloc] init];
+    NSMutableArray *archivedNotes = [[NSMutableArray alloc] init];
     NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
     
     if (buttonIndex == 0) {
@@ -106,7 +106,7 @@
                                                         if ([self.arrayOfNotesFromCoreData indexOfObject:note] == ((NSIndexPath *)selectedItems[i]).item)
                                                             {
                                                             
-                                                            [notesToDelete addObject:(Note *)note];
+                                                            [archivedNotes addObject:(Note *)note];
                                                             [mutableIndexSet addIndex:((NSIndexPath *)selectedItems[i]).item];
                                                                 
                                                             }
@@ -114,7 +114,7 @@
                                     }
     
     
-        if ([notesToDelete count]) {
+        if ([archivedNotes count]) {
             //erase from array in the model and update the collection view;
             NSMutableArray *mutableArrayOfNotes =  [self.arrayOfNotesFromCoreData mutableCopy];
             [mutableArrayOfNotes removeObjectsAtIndexes:[mutableIndexSet copy]];
@@ -125,29 +125,25 @@
             self.collectionView.allowsMultipleSelection = NO;
             self.trashButton.enabled = NO;
             self.userRequestedChange = !self.userRequestedChange;
-            
-            for (id note in notesToDelete) {
-                [self.document.managedObjectContext deleteObject:note];
-            }
 
         }
-        
-        
+        NSMutableArray *dateArray = [[NSMutableArray alloc] init];
+        for (id note in archivedNotes) {
+            [dateArray addObject:((Note *) note).date];
+        }
     
-    //mark archived // delete
+    //mark archived
     
-    /*NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
     request.predicate = [NSPredicate predicateWithFormat:@"date IN %@", dateArray];
     NSError *error = nil;
     NSArray *arrayOfPhotosToArchive = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         for (id note in arrayOfPhotosToArchive) {
-            ((Note *)note).archived = [NSNumber numberWithBool:YES];}*/
+            ((Note *)note).archived = [NSNumber numberWithBool:YES];
             //[self.context save:NULL];
-      
-        
-            [self updateUI:nil];
-        
+            [self fetchNotes];
+        }
     }
 }
 
@@ -215,12 +211,6 @@
 
 -(void) dataImported:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                                  object:self.document.managedObjectContext.persistentStoreCoordinator];
-
-    
-    
     NSLog(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
     NSLog(@"%@",notification);
     
@@ -234,16 +224,7 @@
 	    updated = "{(\n)}";
 	}*/
     
-    //[self saveDocument]; // Save new version of the document in the persistent Store on Device
-    [self updateUI:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(dataImported:)
-                                                 name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                               object:self.document.managedObjectContext.persistentStoreCoordinator];
-
-
-
+    [self saveDocument]; // Save new version of the document in the persistent Store on Device
 }
 
 
@@ -255,7 +236,7 @@
     {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
-        //request.predicate = [NSPredicate predicateWithFormat:@"archived == %@", [NSNumber numberWithBool:NO]];
+        request.predicate = [NSPredicate predicateWithFormat:@"archived == %@", [NSNumber numberWithBool:NO]];
         self.arrayOfNotesFromCoreData = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         
     }
@@ -275,20 +256,20 @@
     if ([sender.sourceViewController isKindOfClass:[ShowNoteViewController class]]) {
         ShowNoteViewController *noteVC = sender.sourceViewController;
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
-            //noteVC.note.text = noteVC.typedText;
-        [self.document.managedObjectContext deleteObject:((Note*)noteVC.note)];
-        [self.document.managedObjectContext save:NULL];
-    
+            noteVC.note.text = noteVC.changedText;
             }
+        else if([sender.sourceViewController isKindOfClass:[NewNoteViewController class]])
+        {
     
             NewNoteViewController *newNote = sender.sourceViewController;
             [Note noteWithContent:newNote.typedText
                         color:newNote.colorKey
                      archived:[NSNumber numberWithBool:NO]
            inManagedObjectContext:self.document.managedObjectContext];
+        }
+
     
-    //[self saveDocument];
-    [self updateUI:nil];
+    [self saveDocument];
     
 
 }
@@ -301,7 +282,7 @@
 
 -(void) updateUI:(NSNotification *)documentSaved
 {
-    //[self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
+    [self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
     [self fetchNotes];
     [self.collectionView reloadData];
     NSLog(@"UI updated");
@@ -355,7 +336,14 @@
 }
 
 
-
+-(void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDocumentStateChangedNotification object:self.document];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                                                  object:self.document.managedObjectContext.persistentStoreCoordinator];
+}
 
 
 - (void)processQueryUpdates:(NSNotification *)notification
@@ -421,16 +409,6 @@ for (int i = 0; i < resultCount; i++) {
     
 }
 
--(void) dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDocumentStateChangedNotification object:self.document];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                                  object:self.document.managedObjectContext.persistentStoreCoordinator];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MyNotificationDocumentIsSaved" object:self.document];
-}
-
 
 -(void) viewDidLoad
 {
@@ -455,11 +433,6 @@ for (int i = 0; i < resultCount; i++) {
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:self.document.managedObjectContext.persistentStoreCoordinator];
     
-     [[NSNotificationCenter defaultCenter] addObserver:self
-                                              selector:@selector(updateUI:)
-                                                  name:@"MyNotificationDocumentIsSaved"
-                                                object:self.document];
-    
     /*[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(persistentStoreUpdated:)
                                                  name:NSPersistentStoreCoordinatorStoresDidChangeNotification
@@ -468,7 +441,7 @@ for (int i = 0; i < resultCount; i++) {
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:self.document.managedObjectContext];
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUI:) name:@"MyNotificationDocumentIsSaved" object:self.document];
     
     
     BOOL started = [self.iCloudQuery startQuery];
