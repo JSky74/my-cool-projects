@@ -7,7 +7,9 @@
 //
 
 #import "NewNoteViewController.h"
+#import "MotivationCVC.h"
 #import "Settings.h"
+#import "AccessoryKeyboardView.h"
 
 @interface NewNoteViewController ()
 
@@ -76,10 +78,14 @@
     return _colors;
 }
 
-
--(void) textViewDidEndEditing:(UITextView *)textView
+-(void) doneEditing
 {
     [self.noteText resignFirstResponder];
+    MotivationCVC *presentingViewController = (MotivationCVC *)self.presentingViewController;
+    NewNoteViewController *thisSegue = (NewNoteViewController *)presentingViewController.presentedViewController;
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [presentingViewController saveNote:thisSegue];
+    }];
 }
 
 
@@ -90,7 +96,10 @@
 
 -(NSString *) typedText
 {
-    return self.noteText.text;
+
+    if ([self.noteText.text length]) {
+        return self.noteText.text;
+    } else return nil;
 }
 
 
@@ -102,6 +111,7 @@
      self.noteText.text = nil;
      self.noteText.font = [UIFont fontWithName:
                            [Settings retrieveFromUserDefaults:@"font_preference"] size:17];
+    self.noteText.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width UIViewControllerPointer:self];
     [self.noteText becomeFirstResponder];
 
 }

@@ -15,6 +15,7 @@
 		2C1B5424169659930006D731 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5423169659930006D731 /* Default.png */; };
 		2C1B5426169659930006D731 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5425169659930006D731 /* Default@2x.png */; };
 		2C1B5428169659930006D731 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5427169659930006D731 /* Default-568h@2x.png */; };
+		2C4EC2F51736370000308A4F /* UIViewController+Done.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EC2F41736370000308A4F /* UIViewController+Done.m */; };
 		2C58E80F171AFB5800B755CB /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C58E80E171AFB5800B755CB /* iPhone.storyboard */; };
 		2C59366F170F2AED0078BF0A /* CellLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C59366E170F2AED0078BF0A /* CellLabel.m */; };
 		2C59368717108F550078BF0A /* WineRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C59368617108F540078BF0A /* WineRed.png */; };
@@ -64,6 +65,8 @@
 		2C1B5425169659930006D731 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2C1B5427169659930006D731 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2C41E930173160EA00839DEF /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Motivation.entitlements; sourceTree = "<group>"; };
+		2C4EC2F31736370000308A4F /* UIViewController+Done.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Done.h"; sourceTree = "<group>"; };
+		2C4EC2F41736370000308A4F /* UIViewController+Done.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Done.m"; sourceTree = "<group>"; };
 		2C58E80E171AFB5800B755CB /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2C59366D170F2AED0078BF0A /* CellLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellLabel.h; sourceTree = "<group>"; };
 		2C59366E170F2AED0078BF0A /* CellLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellLabel.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 		2C1B5402169659930006D731 = {
 			isa = PBXGroup;
 			children = (
+				2C4EC2F31736370000308A4F /* UIViewController+Done.h */,
+				2C4EC2F41736370000308A4F /* UIViewController+Done.m */,
 				2C1B5417169659930006D731 /* Motivation */,
 				2C1B5410169659930006D731 /* Frameworks */,
 				2C1B540E169659930006D731 /* Products */,
@@ -362,6 +367,7 @@
 				2CD7278B171A0143006D42D7 /* Settings.m in Sources */,
 				2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */,
 				2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */,
+				2C4EC2F51736370000308A4F /* UIViewController+Done.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

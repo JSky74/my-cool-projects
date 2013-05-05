@@ -211,10 +211,11 @@
 
 -(void) dataImported:(NSNotification *)notification
 {
+    
     NSLog(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
     NSLog(@"%@",notification);
-    
-    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    [self.document.managedObjectContext performBlock:^{
+        [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];}];
     
     // possible solution
     // if notification.userInfo is empty, send back a message and try to create again!
@@ -224,7 +225,9 @@
 	    updated = "{(\n)}";
 	}*/
     
-    [self saveDocument]; // Save new version of the document in the persistent Store on Device
+    //[self saveDocument]; // Save new version of the document in the persistent Store on Device
+    [self updateUI:nil];
+    
 }
 
 
@@ -251,21 +254,24 @@
 }
 
 
--(IBAction) saveNote:(UIStoryboardSegue *)sender
+-(void) saveNote:(UIViewController *)sender
 {
-    if ([sender.sourceViewController isKindOfClass:[ShowNoteViewController class]]) {
-        ShowNoteViewController *noteVC = sender.sourceViewController;
+    if ([sender isKindOfClass:[ShowNoteViewController class]]) {
+        ShowNoteViewController *noteVC = (ShowNoteViewController *)sender;
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
             noteVC.note.text = noteVC.changedText;
             }
-        else if([sender.sourceViewController isKindOfClass:[NewNoteViewController class]])
+        else if([sender isKindOfClass:[NewNoteViewController class]])
         {
     
-            NewNoteViewController *newNote = sender.sourceViewController;
+            NewNoteViewController *newNote = (NewNoteViewController *)sender;
+            if (newNote.typedText) {
             [Note noteWithContent:newNote.typedText
                         color:newNote.colorKey
                      archived:[NSNumber numberWithBool:NO]
            inManagedObjectContext:self.document.managedObjectContext];
+         }
+            
         }
 
     
@@ -275,14 +281,14 @@
 }
 -(void)saveDocument
 {
-     [DocumentManager saveDocument:self.document];
+    [DocumentManager saveDocument:self.document];
 }
 
 
 
 -(void) updateUI:(NSNotification *)documentSaved
 {
-    [self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
+    //[self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
     [self fetchNotes];
     [self.collectionView reloadData];
     NSLog(@"UI updated");
@@ -457,7 +463,7 @@ for (int i = 0; i < resultCount; i++) {
   self.actionSheet.delegate  = self;
   self.trashButton.enabled = NO;
   [self.document.managedObjectContext setStalenessInterval:0.0];
-  [self.document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+  
  
 }
 

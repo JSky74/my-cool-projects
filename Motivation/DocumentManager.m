@@ -9,8 +9,8 @@
 #import "DocumentManager.h"
 #import <CoreData/CoreData.h>
 
-#define DOCUMENT_NAME @"MotivationDocument2"
-#define TRANSACTION_LOG @"Transactions2"
+#define DOCUMENT_NAME @"MotivationDocument3"
+#define TRANSACTION_LOG @"Transactions3"
 
 @interface DocumentManager ()
 @end
@@ -137,13 +137,14 @@
     
     //merge policy
     [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy]; //??
+    //EXPERIMENTAL
+    //[document.managedObjectContext setRetainsRegisteredObjects:YES];
     
     //This policy merges conflicts between the persistent store’s version of the object and the current in-memory version, giving priority to in-memory changes.
     
     //OMG BUG IN THE API!
     // https://devforums.apple.com/message/785558#785558
     
-
 }
 
 

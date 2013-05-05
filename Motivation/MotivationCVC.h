@@ -16,4 +16,6 @@
 @property (strong, nonatomic) NSMetadataQuery *iCloudQuery;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
+-(void) saveNote:(UIViewController *)sender;
+
 @end

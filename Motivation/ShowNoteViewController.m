@@ -9,6 +9,7 @@
 #import "ShowNoteViewController.h"
 #import "Colors.h"
 #import "AccessoryKeyboardView.h"
+#import "MotivationCVC.h"
 
 @interface ShowNoteViewController ()
 
@@ -53,7 +54,7 @@
     self.noteTextView.textColor = [UIColor darkTextColor];
     self.noteTextView.backgroundColor = [self.colors.noteColors objectForKey:self.note.color];
     self.noteTextView.font = [UIFont fontWithName:[[NSUserDefaults standardUserDefaults] stringForKey:@"font_preference"] size:17];
-    self.noteTextView.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width ShowNotePointer:self];
+    self.noteTextView.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width UIViewControllerPointer:self];
     
 }
 
@@ -65,13 +66,22 @@
 
 
 
-- (IBAction)doneEditing:(id)sender;
+- (IBAction)doneEditing
 {
     
     [self editingWillHappen:NO];
     NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:EMPTY_SPACE];
     self.noteTextView.text = [self.noteTextView.text stringByTrimmingCharactersInSet:characterSet];
-    [self addLeadingSpace];
+    //[self addLeadingSpace];
+    self.changedText =  self.noteTextView.text;
+    //[self removeLeadingSpace];
+    
+    [self.noteTextView resignFirstResponder];
+    MotivationCVC *presentingViewController = (MotivationCVC *)self.presentingViewController;
+    ShowNoteViewController *thisSegue = (ShowNoteViewController *)presentingViewController.presentedViewController;
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+            [presentingViewController saveNote:thisSegue];
+        }];
 }
 
 
@@ -95,16 +105,6 @@
     self.noteTextView.text = self.note.text;
     self.undoButton.enabled = NO;
 }
-
-
-
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [self removeLeadingSpace];
-    self.changedText =  self.noteTextView.text;
-}
-
 
 
 
