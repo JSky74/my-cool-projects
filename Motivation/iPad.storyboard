@@ -32,10 +32,45 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sdx-OT-MOC">
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <collectionViewLayout key="collectionViewLayout" id="7X0-0Q-BEQ" customClass="ShakeLayout"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" reuseIdentifier="Note Cell" id="v0H-SI-1jn" customClass="NoteCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pr-n1-gdI" customClass="CellLabel">
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="trailing" secondItem="v0H-SI-1jn" secondAttribute="trailing" type="default" id="Cnz-ed-n1g"/>
+                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="leading" secondItem="v0H-SI-1jn" secondAttribute="leading" type="default" id="dIY-9a-otG"/>
+                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="top" secondItem="v0H-SI-1jn" secondAttribute="top" type="default" id="hdq-qN-TL9"/>
+                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="bottom" secondItem="v0H-SI-1jn" secondAttribute="bottom" type="default" id="oma-7f-SDE"/>
+                                        </constraints>
+                                        <size key="customSize" width="170" height="170"/>
+                                        <connections>
+                                            <outlet property="label" destination="8Pr-n1-gdI" id="MxV-TN-bma"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="m77-b9-s91" firstAttribute="top" secondItem="gPd-Nv-Fqy" secondAttribute="top" type="default" id="GGZ-q5-mTZ"/>
+                            <constraint firstItem="sdx-OT-MOC" firstAttribute="top" secondItem="m77-b9-s91" secondAttribute="bottom" type="default" id="GaQ-1E-zAY"/>
+                            <constraint firstItem="sdx-OT-MOC" firstAttribute="trailing" secondItem="gPd-Nv-Fqy" secondAttribute="trailing" type="default" id="MqH-pq-KxX"/>
+                            <constraint firstItem="sdx-OT-MOC" firstAttribute="bottom" secondItem="gPd-Nv-Fqy" secondAttribute="bottom" type="default" id="ay6-he-OQz"/>
+                            <constraint firstItem="sdx-OT-MOC" firstAttribute="leading" secondItem="gPd-Nv-Fqy" secondAttribute="leading" type="default" id="cNR-xh-szE"/>
                             <constraint firstItem="m77-b9-s91" firstAttribute="leading" secondItem="gPd-Nv-Fqy" secondAttribute="leading" type="default" id="oJp-iE-JFG"/>
                             <constraint firstItem="m77-b9-s91" firstAttribute="trailing" secondItem="gPd-Nv-Fqy" secondAttribute="trailing" type="default" id="th0-Ub-ysX"/>
                         </constraints>
@@ -51,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5z-jT-Kfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1888" y="-504"/>
+            <point key="canvasLocation" x="-1523" y="-766"/>
         </scene>
         <!--Show Note View Controller-->
         <scene sceneID="jlY-Hr-d8d">
@@ -98,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wd-Oj-MeO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-757" y="-629"/>
+            <point key="canvasLocation" x="-550" y="-1250"/>
         </scene>
         <!--New Note View Controller-->
         <scene sceneID="ZXB-Vc-MD9">
@@ -118,52 +153,10 @@
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
                             </textView>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sdx-OT-MOC">
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="960" id="9Ci-we-f7I"/>
-                                    <constraint firstAttribute="width" constant="768" id="HTh-8V-sEg"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="10" id="p9W-cG-Yzt">
-                                    <size key="itemSize" width="170" height="170"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="110" minY="150" maxX="150" maxY="90"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" reuseIdentifier="Note Cell" id="v0H-SI-1jn" customClass="NoteCell">
-                                        <rect key="frame" x="110" y="150" width="170" height="170"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pr-n1-gdI" customClass="CellLabel">
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="trailing" secondItem="v0H-SI-1jn" secondAttribute="trailing" type="default" id="Cnz-ed-n1g"/>
-                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="leading" secondItem="v0H-SI-1jn" secondAttribute="leading" type="default" id="dIY-9a-otG"/>
-                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="top" secondItem="v0H-SI-1jn" secondAttribute="top" type="default" id="hdq-qN-TL9"/>
-                                            <constraint firstItem="8Pr-n1-gdI" firstAttribute="bottom" secondItem="v0H-SI-1jn" secondAttribute="bottom" type="default" id="oma-7f-SDE"/>
-                                        </constraints>
-                                        <size key="customSize" width="170" height="170"/>
-                                        <connections>
-                                            <outlet property="label" destination="8Pr-n1-gdI" id="MxV-TN-bma"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sdx-OT-MOC" firstAttribute="leading" secondItem="2ad-vO-ves" secondAttribute="leading" constant="-242" id="0q7-sd-bOh"/>
-                            <constraint firstItem="sdx-OT-MOC" firstAttribute="top" secondItem="2ad-vO-ves" secondAttribute="top" constant="-77" id="2mW-xp-Nwi"/>
-                            <constraint firstItem="A39-YL-ekL" firstAttribute="leading" secondItem="2ad-vO-ves" secondAttribute="leading" constant="56" id="L58-7z-dbX"/>
+                            <constraint firstItem="A39-YL-ekL" firstAttribute="leading" secondItem="2ad-vO-ves" secondAttribute="leading" constant="56" id="2fM-Sv-iJH"/>
                             <constraint firstItem="A39-YL-ekL" firstAttribute="top" secondItem="2ad-vO-ves" secondAttribute="top" constant="348" id="PbX-u8-BZi"/>
                         </constraints>
                     </view>
@@ -175,9 +168,70 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ywb-nY-RqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1020" y="-342"/>
+            <point key="canvasLocation" x="-535" y="-115"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CellLabel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CellLabel.h"/>
+        </class>
+        <class className="MotivationCVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MotivationCVC.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="dismissNote:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="userRequestsChangeButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="motivationCollectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="trashButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NewNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewNoteViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="noteText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NoteCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NoteCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="label" candidateClass="CellLabel"/>
+            </relationships>
+        </class>
+        <class className="NotesAbstractViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NotesAbstractViewController.h"/>
+        </class>
+        <class className="ShakeLayout" superclassName="UICollectionViewFlowLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShakeLayout.h"/>
+        </class>
+        <class className="ShowNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowNoteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="edit:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="undoLatestTextChangeButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="noteTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="undoButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
