@@ -7,11 +7,15 @@
 //
 
 #import "Colors.h"
+#import "NotesAbstractViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface NewNoteViewController : UIViewController <UITextViewDelegate>
+@interface NewNoteViewController : NotesAbstractViewController <UITextViewDelegate>
 
 @property (readonly, nonatomic) NSString *typedText;
 @property (readonly, nonatomic) NSString *colorKey;
+
+
+-(void) doneEditing;
 
 @end

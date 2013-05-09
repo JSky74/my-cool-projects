@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotesAbstractViewController.h"
 #import "NewNoteViewController.h"
 #import "Note.h"
 
-@interface ShowNoteViewController : UIViewController
+@interface ShowNoteViewController : NotesAbstractViewController
 
 
 @property (strong, nonatomic) Note* note;
 @property (readonly, nonatomic) NSString *changedText;
 
-- (IBAction)doneEditing;
+
+- (void) doneEditing;
+- (void) setBackgroundColor:(NSNumber *)index;
 
 @end

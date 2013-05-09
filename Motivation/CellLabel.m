@@ -34,7 +34,7 @@
     [self.textColor set];
     
     CGRect newRect = CGRectMake(self.bounds.origin.x+OFFSET, self.bounds.origin.y+OFFSET, self.bounds.size.width-3*OFFSET, self.bounds.size.height-3*OFFSET);
-                            
+    // try to create labels and then add them to this wiew as a subview withouth using drawRect
     [self.text drawInRect:newRect withFont:[UIFont fontWithName:self.fontName size:FONT_SIZE] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
     
     if (self.selected) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0A6D2E17385FAC00899E6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C0A6D2D17385FAC00899E6C /* QuartzCore.framework */; };
+		2C0A6D31173873F300899E6C /* ShakeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A6D30173873F300899E6C /* ShakeLayout.m */; };
 		2C1B5412169659930006D731 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1B5411169659930006D731 /* UIKit.framework */; };
 		2C1B5414169659930006D731 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1B5413169659930006D731 /* Foundation.framework */; };
 		2C1B5416169659930006D731 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1B5415169659930006D731 /* CoreGraphics.framework */; };
@@ -15,7 +17,8 @@
 		2C1B5424169659930006D731 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5423169659930006D731 /* Default.png */; };
 		2C1B5426169659930006D731 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5425169659930006D731 /* Default@2x.png */; };
 		2C1B5428169659930006D731 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5427169659930006D731 /* Default-568h@2x.png */; };
-		2C4EC2F51736370000308A4F /* UIViewController+Done.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EC2F41736370000308A4F /* UIViewController+Done.m */; };
+		2C4EC2F81737D6B000308A4F /* ColorChooserKeyboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EC2F71737D6B000308A4F /* ColorChooserKeyboardCell.m */; };
+		2C4EC2FB1737E3FD00308A4F /* NotesAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */; };
 		2C58E80F171AFB5800B755CB /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C58E80E171AFB5800B755CB /* iPhone.storyboard */; };
 		2C59366F170F2AED0078BF0A /* CellLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C59366E170F2AED0078BF0A /* CellLabel.m */; };
 		2C59368717108F550078BF0A /* WineRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C59368617108F540078BF0A /* WineRed.png */; };
@@ -37,6 +40,7 @@
 		2C7C51F917088DD9001BB241 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C51F817088DD8001BB241 /* Colors.m */; };
 		2C7C51FF170B1002001BB241 /* ShowNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */; };
 		2C7C5201170C021B001BB241 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C5200170C021B001BB241 /* iPad.storyboard */; };
+		2C807057173AE41600BDF9BD /* Jiggling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C807056173AE41600BDF9BD /* Jiggling.m */; };
 		2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95DAEC1730D90C00D6E1CF /* Change log.m */; };
 		2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */; };
 		2CD727751718B099006D42D7 /* SmallTileBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727741718B099006D42D7 /* SmallTileBackground.png */; };
@@ -52,6 +56,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C0A6D2D17385FAC00899E6C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2C0A6D2F173873F300899E6C /* ShakeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeLayout.h; sourceTree = "<group>"; };
+		2C0A6D30173873F300899E6C /* ShakeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeLayout.m; sourceTree = "<group>"; };
 		2C1B540D169659930006D731 /* Motivation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1B5411169659930006D731 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C1B5413169659930006D731 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,8 +72,10 @@
 		2C1B5425169659930006D731 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2C1B5427169659930006D731 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2C41E930173160EA00839DEF /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Motivation.entitlements; sourceTree = "<group>"; };
-		2C4EC2F31736370000308A4F /* UIViewController+Done.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Done.h"; sourceTree = "<group>"; };
-		2C4EC2F41736370000308A4F /* UIViewController+Done.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Done.m"; sourceTree = "<group>"; };
+		2C4EC2F61737D6B000308A4F /* ColorChooserKeyboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorChooserKeyboardCell.h; sourceTree = "<group>"; };
+		2C4EC2F71737D6B000308A4F /* ColorChooserKeyboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorChooserKeyboardCell.m; sourceTree = "<group>"; };
+		2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesAbstractViewController.h; sourceTree = "<group>"; };
+		2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesAbstractViewController.m; sourceTree = "<group>"; };
 		2C58E80E171AFB5800B755CB /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2C59366D170F2AED0078BF0A /* CellLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellLabel.h; sourceTree = "<group>"; };
 		2C59366E170F2AED0078BF0A /* CellLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellLabel.m; sourceTree = "<group>"; };
@@ -93,6 +102,8 @@
 		2C7C51FD170B1002001BB241 /* ShowNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowNoteViewController.h; sourceTree = "<group>"; };
 		2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowNoteViewController.m; sourceTree = "<group>"; };
 		2C7C5200170C021B001BB241 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
+		2C807055173AE41600BDF9BD /* Jiggling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jiggling.h; sourceTree = "<group>"; };
+		2C807056173AE41600BDF9BD /* Jiggling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jiggling.m; sourceTree = "<group>"; };
 		2C95DAEB1730D90C00D6E1CF /* Change log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Change log.h"; sourceTree = "<group>"; };
 		2C95DAEC1730D90C00D6E1CF /* Change log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Change log.m"; sourceTree = "<group>"; };
 		2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryKeyboardView.h; sourceTree = "<group>"; };
@@ -119,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0A6D2E17385FAC00899E6C /* QuartzCore.framework in Frameworks */,
 				2C7C51F3170843B4001BB241 /* CoreData.framework in Frameworks */,
 				2C1B5412169659930006D731 /* UIKit.framework in Frameworks */,
 				2C1B5414169659930006D731 /* Foundation.framework in Frameworks */,
@@ -132,8 +144,9 @@
 		2C1B5402169659930006D731 = {
 			isa = PBXGroup;
 			children = (
-				2C4EC2F31736370000308A4F /* UIViewController+Done.h */,
-				2C4EC2F41736370000308A4F /* UIViewController+Done.m */,
+				2C0A6D2D17385FAC00899E6C /* QuartzCore.framework */,
+				2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */,
+				2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */,
 				2C1B5417169659930006D731 /* Motivation */,
 				2C1B5410169659930006D731 /* Frameworks */,
 				2C1B540E169659930006D731 /* Products */,
@@ -171,6 +184,10 @@
 				2C95DAEC1730D90C00D6E1CF /* Change log.m */,
 				2C7C51EF17083B43001BB241 /* MotivationCVC.h */,
 				2C7C51F017083B43001BB241 /* MotivationCVC.m */,
+				2C807055173AE41600BDF9BD /* Jiggling.h */,
+				2C807056173AE41600BDF9BD /* Jiggling.m */,
+				2C0A6D2F173873F300899E6C /* ShakeLayout.h */,
+				2C0A6D30173873F300899E6C /* ShakeLayout.m */,
 				2CFAFA1917072A9900FB670E /* NewNoteViewController.h */,
 				2CFAFA1A17072A9900FB670E /* NewNoteViewController.m */,
 				2CD476DC171F55B60086338C /* ShowNote */,
@@ -251,6 +268,8 @@
 				2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */,
 				2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */,
 				2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */,
+				2C4EC2F61737D6B000308A4F /* ColorChooserKeyboardCell.h */,
+				2C4EC2F71737D6B000308A4F /* ColorChooserKeyboardCell.m */,
 			);
 			name = ShowNote;
 			sourceTree = "<group>";
@@ -367,7 +386,10 @@
 				2CD7278B171A0143006D42D7 /* Settings.m in Sources */,
 				2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */,
 				2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */,
-				2C4EC2F51736370000308A4F /* UIViewController+Done.m in Sources */,
+				2C4EC2F81737D6B000308A4F /* ColorChooserKeyboardCell.m in Sources */,
+				2C4EC2FB1737E3FD00308A4F /* NotesAbstractViewController.m in Sources */,
+				2C0A6D31173873F300899E6C /* ShakeLayout.m in Sources */,
+				2C807057173AE41600BDF9BD /* Jiggling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,6 @@
 
 @property (strong, nonatomic) NSDictionary *noteImages;
 @property (strong, nonatomic) NSDictionary *noteColors;
-
+@property (strong, nonatomic) NSArray *colorsArray;
 
 @end

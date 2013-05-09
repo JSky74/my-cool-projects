@@ -79,7 +79,7 @@
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
         NSLog(@"No document!");
-        exit(1);
+        //exit(1);
     }
     if (document.documentState == UIDocumentStateNormal) {
          NSLog(@"Document is open/normal , trying to save ...");

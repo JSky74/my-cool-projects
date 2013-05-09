@@ -8,79 +8,67 @@
 
 #import "AccessoryKeyboardView.h"
 #import "NewNoteViewController.h"
+#import "ColorChooserKeyboardCell.h"
+#import "Colors.h"
 
-#define BUTTON_HEIGHT 30
+
+
+@interface AccessoryKeyboardView ()
+@property (nonatomic) int buttonHeight;
+@property (nonatomic, strong) NSArray* arrayOfColorChoosers;
+@end
+
+
+
 
 @implementation AccessoryKeyboardView
 
--(id)initWithWidth:(CGFloat) width UIViewControllerPointer:(UIViewController *)pointer
+
+- (int) buttonHeight
 {
-    CGRect accessFrame = CGRectMake(0.0, 0.0, width, BUTTON_HEIGHT);
+    if (!_buttonHeight) {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            _buttonHeight = 30;
+        } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        {
+            _buttonHeight = 40;
+        }
+    }
+    return _buttonHeight;
+}
+
+-(id)initWithWidth:(CGFloat)width UIViewControllerPointer:(NotesAbstractViewController *)pointer
+{
+    CGRect accessFrame = CGRectMake(0.0, 0.0, width, self.buttonHeight);
     self = [super initWithFrame:accessFrame];
     if (self) {
-        _pointer = pointer;
+        _pointerToViewController = pointer;
         [self setUp];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{    
-    self = [super initWithFrame:frame];
-    return self;
-}
+
 
 -(UIButton *) compButton
 {
     if (!_compButton) {
-        _compButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _compButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        _compButton.backgroundColor = [UIColor whiteColor];
     }
     return _compButton;
 }
 
-- (NSArray *) imagesArray
-{
-    if (!_imagesArray) {
-        _imagesArray = [NSArray arrayWithObjects:  [UIImage imageNamed:@"LightYellow46"],
-                                    [UIImage imageNamed:@"LimeGreen46"],
-                                    [UIImage imageNamed:@"HeavenlyBlue46"],
-                                    [UIImage imageNamed:@"CarminRed46"],
-                                    [UIImage imageNamed:@"WineRed46"],
-                                    [UIImage imageNamed:@"SandyYellow46"],
-         nil];
-    
-    }
-    return _imagesArray;
-}
-
-- (UISegmentedControl *) colorsSegementedControl
-{
-    if (!_colorsSegementedControl){
-            _colorsSegementedControl = [[UISegmentedControl alloc] initWithItems:self.imagesArray];
-        //_colorsSegementedControl.apportionsSegmentWidthsByContent = YES;
-        _colorsSegementedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-        
-        //[[UISegmentedControl appearance] setContentMode:UIViewContentModeScaleToFill];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:0];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:1];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:2];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:3];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:4];
-        [_colorsSegementedControl setWidth:40 forSegmentAtIndex:5];
-        
-        _colorsSegementedControl.frame = CGRectMake(self.colorsSegementedControl.frame.size.width, self.colorsSegementedControl.frame.origin.y-15, self.colorsSegementedControl.frame.size.width, self.colorsSegementedControl.frame.size.height); //vet inte varför detta centrerar
-        
-        [_colorsSegementedControl addTarget:self.pointer action:@selector(segmentedControlNoteChooser:) forControlEvents:UIControlEventValueChanged];
-                 
-    }
-    return _colorsSegementedControl;
-}
 
 -(void) setUp
 {
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                initWithTarget:self  action:@selector(tapGesture:)]];
     
-    self.backgroundColor = [UIColor clearColor];
-    self.compButton.frame = CGRectMake(self.bounds.size.width-70, self.bounds.size.height/2-30/2, 70.0, BUTTON_HEIGHT);
+    
+    self.backgroundColor = [UIColor whiteColor];
+    CGFloat buttonWidth = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
+    self.compButton.frame = CGRectMake(self.bounds.size.width-buttonWidth, 0, buttonWidth, self.buttonHeight);
 
     [self.compButton setTitle: @"Done" forState:UIControlStateNormal];
     self.compButton.tintColor = [UIColor grayColor];
@@ -89,26 +77,81 @@
     [self.compButton addTarget:self action:@selector(resign)
         forControlEvents:UIControlEventTouchUpInside];
 
-    _toolbar = [[UIToolbar alloc] initWithFrame:self.frame];
-    [_toolbar setBarStyle:UIBarStyleBlackTranslucent];
-    
-    
-    [self addSubview:self.toolbar];
+    for (int i = 0; i<NUMBER_OF_COLORS; i++) {
+        [self addSubview:[self.arrayOfColorChoosers objectAtIndex:i]];
+        }
     [self addSubview:self.compButton];
-    
-    if ([self.pointer isKindOfClass:[NewNoteViewController class]]) {
-        [self.toolbar addSubview:self.colorsSegementedControl];
-    }
-    
+}
 
+
+-(NSArray *) arrayOfColorChoosers
+{
+if (!_arrayOfColorChoosers)
+{
+    CGFloat cellLength = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
+    NotesAbstractViewController *parentView = self.pointerToViewController;
+    NSMutableArray *mutableArrayOfColorChoosers  = [[NSMutableArray alloc] init];
     
+    for (int i = 0; i<NUMBER_OF_COLORS; i++) {
+    ColorChooserKeyboardCell *cell =    [[ColorChooserKeyboardCell alloc] initWithFrame:CGRectMake(self.frame.origin.x + i*cellLength, self.frame.origin.y, cellLength, self.buttonHeight) cellColor:[parentView.colors.colorsArray objectAtIndex:i]  height:self.buttonHeight index:i];
+        [mutableArrayOfColorChoosers addObject:cell];
+        _arrayOfColorChoosers = mutableArrayOfColorChoosers;
+        }
+}
+   return [_arrayOfColorChoosers copy];
+}
+
+-(void) tapGesture:(UITapGestureRecognizer *) tapGesture
+{
+    CGPoint tapLocation = [tapGesture locationInView:self];
+    for (ColorChooserKeyboardCell* cell in self.arrayOfColorChoosers)
+    {
+        CGPoint cellView =  [cell convertPoint:tapLocation fromView:self];
+        if ([cell pointInside:cellView withEvent:nil]) {
+            [self animateView:(cell)];
+        }
+    }
+}
+
+-(void)animateView:(ColorChooserKeyboardCell*)view
+{
+    CGRect originalRect = view.frame;
+    [self bringSubviewToFront:view];
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationCurveEaseOut animations:^(void)
+    {
+        CGPoint translatedOrigin = [self translateToParentView:view];
+        [view setFrame:CGRectMake(translatedOrigin.x-10, translatedOrigin.y-10, view.frame.size.width+20, view.frame.size.height+20)];
+    }
+completion:^(BOOL finished){
+    
+    [UIView animateWithDuration:0.2 animations:^{
+    [view setFrame:originalRect];
+        NSNumber *objectIndex = [NSNumber numberWithInt:view.indexOfCell];
+        [self.pointerToViewController performSelector:@selector(setBackgroundColor:) withObject:objectIndex];
+    }];
+
+}];
+}
+
+-(CGPoint)translateToParentView:(UIView*)view
+{
+    CGPoint origin = [self convertPoint:view.bounds.origin fromView:view];
+
+    return origin;
 }
 
 -(void) resign //called by Done button
 {
-    [self.pointer doneEditing];
+    
+    [self performSelector:@selector(dismissKeyboard) withObject:self afterDelay:0.1];
 }
+     
 
+-(void) dismissKeyboard
+{
+    [self.pointerToViewController doneEditing];
+}
 
 
 @end

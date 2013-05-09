@@ -10,11 +10,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MotivationCVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
+@interface MotivationCVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIActionSheetDelegate>
 
 @property (strong, nonatomic) UIManagedDocument *document;
 @property (strong, nonatomic) NSMetadataQuery *iCloudQuery;
-@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property (strong, nonatomic) IBOutlet UICollectionView *motivationCollectionView;
 
 -(void) saveNote:(UIViewController *)sender;
 

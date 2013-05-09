@@ -11,6 +11,7 @@
 
 @interface MotivationAppDelegate ()
 @property MotivationCVC *rootViewController;
+
 @end
 
 
@@ -41,6 +42,7 @@
         {
             NSLog(@"iCloud is available\n");
             id currentToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
+          
             if (currentToken != nil)
                 NSLog(@"User is signed in\n");
        
@@ -48,7 +50,8 @@
         else
         {
             NSLog(@"iCloud is not available.\n");
-            exit(-1);
+           
+            
         }
         });
     

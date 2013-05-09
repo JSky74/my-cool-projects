@@ -15,8 +15,9 @@
 
 @property (weak, nonatomic) IBOutlet      UITextView *noteTextView;
 @property (readwrite, nonatomic)            NSString *changedText;
-@property (strong, nonatomic)                 Colors *colors;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *undoButton;
+@property (readwrite, nonatomic) NSString *colorKey;
+
 
 @end
 
@@ -34,14 +35,11 @@
     [self.noteTextView setSelectedRange:textRange];
 }
 
-
--(Colors *) colors
+- (void) setBackgroundColor:(NSNumber *)index
 {
-    if (!_colors) {
-            _colors = [[Colors alloc] init];
-    } return _colors;
+    [super setBackgroundColor:index];
+    self.noteTextView.backgroundColor = self.view.backgroundColor;
 }
-
 
 
 -(void) viewDidLoad
@@ -58,15 +56,17 @@
     
 }
 
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self addLeadingSpace];
+
 }
 
 
 
-- (IBAction)doneEditing
+- (void) doneEditing
 {
     
     [self editingWillHappen:NO];
