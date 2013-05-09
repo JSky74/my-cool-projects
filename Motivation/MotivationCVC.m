@@ -271,7 +271,7 @@
     NSLog(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
     NSLog(@"%@",notification);
     [self.document.managedObjectContext performBlock:^{
-        [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];}];
+    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];}];
     
     // possible solution
     // if notification.userInfo is empty, send back a message and try to create again!
@@ -321,6 +321,7 @@
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
             noteVC.note.text = noteVC.changedText;
             noteVC.note.color = noteVC.colorKey;
+            [self updateVisibleCells];
             }
         else if([sender isKindOfClass:[NewNoteViewController class]])
         {
@@ -356,8 +357,14 @@
         NSArray *noteOnTop = [NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]];
         [self.motivationCollectionView insertItemsAtIndexPaths:noteOnTop];
         self.noteInserted = NO;
+        //inserted localy
+        [self updateVisibleCells];
+    } else
+    {
+        //data from ubiquity
+        [self.motivationCollectionView reloadData];
     }
-    [self updateVisibleCells];
+    
     NSLog(@"UI updated");
      //[self shakeCells];
 }
