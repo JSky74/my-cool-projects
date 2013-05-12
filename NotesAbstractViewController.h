@@ -11,8 +11,8 @@
 
 @interface NotesAbstractViewController : UIViewController
 
-
 - (void) doneEditing; //abstract
+
 - (void) setBackgroundColor:(NSNumber *)index;
 - (void) colorChosen:(NSNumber *) indexOfColor;
 - (Colors *) colors;
@@ -20,3 +20,7 @@
 @property (readonly, nonatomic) NSString *colorKey;
  
 @end
+
+
+
+

@@ -7,6 +7,7 @@
 //
 
 #import "ShakeLayout.h"
+#import "NoteCell.h"
 
 @implementation ShakeLayout
 @synthesize shake = _shake;
@@ -36,14 +37,14 @@
 - (UICollectionViewLayoutAttributes *) layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    
+    //NoteCell*  cell = [self.collectionView cellForItemAtIndexPath:indexPath];
     
     if (self.shake) {
         [self applyTransformToLayoutAttributes:attributes];
     }
-    if ([[self.collectionView cellForItemAtIndexPath:indexPath] isHighlighted]) {
-        [self enlargeCell:attributes];
-    }
+//    if (cell.enlarged]) {
+//        [attributes.center =  ];
+//    }
     
     return attributes;
     
@@ -58,9 +59,9 @@
         if (self.shake) {
             [self applyTransformToLayoutAttributes:cellAttributes];
         }
-        if ([[self.collectionView cellForItemAtIndexPath:cellAttributes.indexPath] isHighlighted]) {
-            [self enlargeCell:cellAttributes];
-        }
+//        if ([[self.collectionView cellForItemAtIndexPath:cellAttributes.indexPath] isHighlighted]) {
+//            [self enlargeCell:cellAttributes];
+//        }
         
     }
  return allAttributesInRect;
@@ -91,19 +92,19 @@
 
 
 
--(void) enlargeCell:(UICollectionViewLayoutAttributes *)layoutAttributes
-{
-
-    CATransform3D scale = CATransform3DMakeScale(1.05, 1.05, 1);
-    
-    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        layoutAttributes.transform3D  = scale;
-    } completion:^(BOOL finished){
-        
-    }];
-
-
-}
+//-(void) enlargeCell:(UICollectionViewLayoutAttributes *)layoutAttributes
+//{
+//
+//    CATransform3D scale = CATransform3DMakeScale(1.05, 1.05, 1);
+//    
+//    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+//        layoutAttributes.transform3D  = scale;
+//    } completion:^(BOOL finished){
+//        
+//    }];
+//
+//
+//}
 
 
 

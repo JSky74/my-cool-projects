@@ -16,7 +16,7 @@
 
 @implementation Jiggling
 
-#define kAnimationRotateDeg 0.5
+#define kAnimationRotateDeg 1.0
 #define kAnimationTranslateX 1.0
 #define kAnimationTranslateY 1.0
 

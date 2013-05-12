@@ -10,5 +10,7 @@
 #import "NoteCell.h"
 
 @interface Jiggling : NoteCell
+
 -(void)startJiggling;
+
 @end

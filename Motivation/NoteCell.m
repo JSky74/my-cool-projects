@@ -7,9 +7,11 @@
 //
 
 #import "NoteCell.h"
+#import "MotivationCollectionView.h"
 
 @interface NoteCell ()
 @property CGAffineTransform conCatTransform;
+@property (nonatomic) BOOL enlarged;
 
 @end
 
@@ -17,6 +19,8 @@
 
 
 @implementation NoteCell
+
+#define ENLARGMENT_SCALEFACTOR 1.1
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -42,10 +46,12 @@
     double xScale =1.0;
     double yScale =1.0;
     
-    if (enlarge)
+    [self setEnlarged:enlarge];
+    
+    if (self.enlarged)
     {
-        xScale = 1.1;
-        yScale = 1.1;
+        xScale = ENLARGMENT_SCALEFACTOR;
+        yScale = ENLARGMENT_SCALEFACTOR;
     } else
         {
              xScale = 1.0;
@@ -53,21 +59,12 @@
         }
         
         
-
-        
     CGAffineTransform scale = CGAffineTransformMakeScale(xScale, yScale);
     
-    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn animations:^{
         self.transform  = scale;
-    } completion:^(BOOL finished){
-        
-    }];
-
+    } completion:^(BOOL finished){ }];
 }
-
-
-
-
 
 -(void)setJigglingEnabled:(NSNumber *)jigglingEnabled
 {

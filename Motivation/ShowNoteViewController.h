@@ -18,7 +18,4 @@
 @property (readonly, nonatomic) NSString *changedText;
 
 
-- (void) doneEditing;
-- (void) setBackgroundColor:(NSNumber *)index;
-
 @end

@@ -26,15 +26,19 @@
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *changeButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *composeBarButton;
 @property (strong, nonatomic) ShakeLayout* myLayout;
 @property (strong, nonatomic) NSNumber *cellsAreJiggling;
 @property (strong, nonatomic) NSMutableArray *tempArray;
+
 @property BOOL noteInserted;
 @end
 
 
 
 @implementation MotivationCVC
+
+
 
 -(NSMutableArray *) tempArray
 {
@@ -68,6 +72,7 @@
     else if (self.userRequestedChange)
     {
         [self.motivationCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+       
     }
 
 }
@@ -77,17 +82,19 @@
 {
     if(self.trashButton.enabled)
     {
-        NoteCell *cell = ((NoteCell *)[self.motivationCollectionView cellForItemAtIndexPath:indexPath]);
-        [cell enlargeCell:NO];
+        //NoteCell *cell = ((NoteCell *)[self.motivationCollectionView cellForItemAtIndexPath:indexPath]);
+        //[self.motivationCollectionView restoreNoteCell:indexPath];
     }
 }
+
 
 -(void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
   if (self.trashButton.enabled)
   {
-    NoteCell *cell = ((NoteCell *)[self.motivationCollectionView cellForItemAtIndexPath:indexPath]);
-      [cell enlargeCell:YES];
+//    NoteCell *cell = ((NoteCell *)[self.motivationCollectionView cellForItemAtIndexPath:indexPath]);
+//    [cell enlargeCell:YES];
+      
   }
 }
 
@@ -119,7 +126,7 @@
     if ([cell isKindOfClass:[NoteCell class]]) {
         NoteCell *noteCell = (NoteCell *)cell;
         
-        //noteCell.jigglingEnabled = self.cellsAreJiggling;
+        noteCell.jigglingEnabled = self.cellsAreJiggling;
         
         noteCell.label.text = note.text;
         noteCell.label.textColor = [UIColor darkTextColor];
@@ -207,25 +214,62 @@
 - (IBAction)userRequestsChangeButton:(UIBarButtonItem *)sender {
    
     self.userRequestedChange = !self.userRequestedChange;
+
     
     if (!self.trashButton.enabled) {
         sender.tintColor = [UIColor blueColor];
         self.motivationCollectionView.allowsMultipleSelection = YES;
         self.trashButton.enabled = YES;
+        self.composeBarButton.enabled = NO;
         [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:YES]];
         [self setCellsAreJiggling:[NSNumber numberWithBool:YES]];
-        //[self.collectionView.visibleCells makeObjectsPerformSelector:@selector(startJiggling)];
+        [self.motivationCollectionView addLongPressGestureRecognizer];
+       
     } else if(self.trashButton.enabled) {
+        [self.composeBarButton setEnabled:YES];
         sender.tintColor = nil;
         self.motivationCollectionView.allowsMultipleSelection = NO;
         self.trashButton.enabled = NO;
         [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:NO]];
         [self setCellsAreJiggling:[NSNumber numberWithBool:NO]];
         [self.motivationCollectionView reloadData];
+        [self.motivationCollectionView removeLongPressGestureRecognizer];
 
         
     }
 }
+
+-(void )userWillChangeLayout:(NSNotification *) pointDictionary
+{
+//    NSArray *objects = [NSArray arrayWithObjects:pointValue, indexToDelete,nil];
+//    NSArray *keys = [NSArray arrayWithObjects:@"GestureEndedAtPoint", @"IndexToDelete", nil];
+    
+    CGPoint endPoint = CGPointFromString([pointDictionary.userInfo valueForKey:@"GestureEndedAtPoint"]);
+    NSIndexPath *indexToDelete = [pointDictionary.userInfo valueForKey:@"IndexToDelete"];
+    NSIndexPath *indexToInsert = [self.motivationCollectionView indexPathForItemAtPoint:endPoint];
+    
+    NSIndexPath *newLocation = [self.motivationCollectionView indexPathForItemAtPoint:endPoint];
+    if (newLocation) {
+        NSMutableArray *dataModel = [[NSMutableArray alloc] initWithArray:self.arrayOfNotesFromCoreData];
+        Note *noteToMove = (Note *)[self.arrayOfNotesFromCoreData objectAtIndex:indexToDelete.item];
+        
+        [dataModel removeObjectAtIndex:indexToDelete.item];
+        self.arrayOfNotesFromCoreData = [dataModel copy];
+        [self.motivationCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObjects:indexToDelete, nil]];
+        
+        [dataModel insertObject:noteToMove atIndex:indexToInsert.item];
+        self.arrayOfNotesFromCoreData = [dataModel copy];
+        
+
+        
+        [self.motivationCollectionView  insertItemsAtIndexPaths:[NSArray arrayWithObjects:indexToInsert, nil]];
+        //[self updateVisibleCells];
+    }
+    
+    
+
+}
+
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -270,8 +314,8 @@
     
     NSLog(@"NSPersistentStoreDidImportUbiquitousContentChangesNotification");
     NSLog(@"%@",notification);
-    [self.document.managedObjectContext performBlock:^{
-    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];}];
+//    [self.document.managedObjectContext performBlock:^{
+//    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];}];
     
     // possible solution
     // if notification.userInfo is empty, send back a message and try to create again!
@@ -280,9 +324,8 @@
 	    inserted = "{(\n)}";
 	    updated = "{(\n)}";
 	}*/
-    
-    //[self saveDocument]; // Save new version of the document in the persistent Store on Device
-    [self updateUI:nil];
+    [self.document.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    [self saveDocument]; // Save new version of the document in the persistent Store on Device
     
 }
 
@@ -296,10 +339,9 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
         request.predicate = [NSPredicate predicateWithFormat:@"archived == %@", [NSNumber numberWithBool:NO]];
-        //self.arrayOfNotesFromCoreData = nil;
         NSArray *fetch = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         self.arrayOfNotesFromCoreData = fetch;
-        NSLog(@"%@", self.arrayOfNotesFromCoreData);
+        //NSLog(@"%@", self.arrayOfNotesFromCoreData);
         
     }
    return error; 
@@ -320,8 +362,7 @@
         ShowNoteViewController *noteVC = (ShowNoteViewController *)sender;
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
             noteVC.note.text = noteVC.changedText;
-            noteVC.note.color = noteVC.colorKey;
-            [self updateVisibleCells];
+            //[self updateVisibleCells];
             }
         else if([sender isKindOfClass:[NewNoteViewController class]])
         {
@@ -333,14 +374,11 @@
                         color:newNote.colorKey
                      archived:[NSNumber numberWithBool:NO]
            inManagedObjectContext:self.document.managedObjectContext];
+            
                 [self setNoteInserted:YES];
             }
       }
-
-    [self.document.managedObjectContext save:NULL];
-    [self updateUI:nil];
-   
-
+[self saveDocument]; //should generate notification "MyNotificationDocumentSaved" and update UI
 }
 -(void)saveDocument
 {
@@ -351,22 +389,23 @@
 
 -(void) updateUI:(NSNotification *)documentSaved
 {
-    //[self.document.managedObjectContext reset]; //This updates the UI properly if the import Notification is not empty
     [self fetchNotes];
+    
     if (self.noteInserted) {
         NSArray *noteOnTop = [NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:0]];
         [self.motivationCollectionView insertItemsAtIndexPaths:noteOnTop];
-        self.noteInserted = NO;
+        [self setNoteInserted:NO];
         //inserted localy
         [self updateVisibleCells];
     } else
     {
         //data from ubiquity
         [self.motivationCollectionView reloadData];
+        [self performSelector:@selector(shakeCells) withObject:nil afterDelay:1];
     }
     
     NSLog(@"UI updated");
-     //[self shakeCells];
+    
 }
 
 -(void)updateVisibleCells
@@ -384,8 +423,7 @@
 
 -(void) applicationIsActiveAgain:(NSNotification *) notification
 {
-    //[self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:1];
-    //[self performSelector:@selector(shakeCells) withObject:nil afterDelay:3];
+    [self performSelector:@selector(updateUI:) withObject:nil afterDelay:1];
 }
 
 
@@ -486,13 +524,6 @@ for (int i = 0; i < resultCount; i++) {
 
 
 
--(void) managedObjectsDidChange:(NSNotification *)changeNotification
-{
-    NSLog(@"managedObjectsDidChange:  %@", changeNotification.userInfo);
-    
-}
-
-
 -(void) viewDidLoad
 {
     [super viewDidLoad];
@@ -500,6 +531,7 @@ for (int i = 0; i < resultCount; i++) {
     while (!self.document.managedObjectContext) {
         NSLog(@"Document not ready");
     }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(documentStateChanged:)
                                                  name:UIDocumentStateChangedNotification
@@ -516,7 +548,11 @@ for (int i = 0; i < resultCount; i++) {
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:self.document.managedObjectContext.persistentStoreCoordinator];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUI:) name:@"MyNotificationDocumentIsSaved" object:self.document];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUI:)
+                                                 name:@"MyNotificationDocumentIsSaved"
+                                               object:self.document];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userWillChangeLayout:) name:@"UserWillChangeLayout" object:self.motivationCollectionView];
     
     
     BOOL started = [self.iCloudQuery startQuery];
@@ -534,10 +570,15 @@ for (int i = 0; i < resultCount; i++) {
   self.trashButton.enabled = NO;
   
   [self.document.managedObjectContext setStalenessInterval:0.0];
-  
- 
+    
 }
 
+-(void) panGestureDiscovered
+{
+    if (self.userRequestedChange) {
+        NSLog(@"Pan");
+    }
+}
 
 -(void) moveDocumentToCloud
 {
@@ -631,6 +672,10 @@ for (int i = 0; i < resultCount; i++) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                   object:self.document.managedObjectContext.persistentStoreCoordinator];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"MyNotificationDocumentIsSaved"
+                                                  object:self.document];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UserWillChangeLayout" object:self.motivationCollectionView];
 }
 
 

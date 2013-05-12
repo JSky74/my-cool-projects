@@ -16,6 +16,4 @@
 @property (readonly, nonatomic) NSString *colorKey;
 
 
--(void) doneEditing;
-
 @end

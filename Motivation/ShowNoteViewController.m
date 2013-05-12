@@ -16,10 +16,11 @@
 @property (weak, nonatomic) IBOutlet      UITextView *noteTextView;
 @property (readwrite, nonatomic)            NSString *changedText;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *undoButton;
-@property (readwrite, nonatomic) NSString *colorKey;
-
 
 @end
+
+
+
 
 @implementation ShowNoteViewController
 
@@ -74,6 +75,7 @@
     self.noteTextView.text = [self.noteTextView.text stringByTrimmingCharactersInSet:characterSet];
     //[self addLeadingSpace];
     self.changedText =  self.noteTextView.text;
+    self.note.color = [[super.colors.noteColors allKeysForObject:self.view.backgroundColor] lastObject];
     //[self removeLeadingSpace];
     
     [self.noteTextView resignFirstResponder];

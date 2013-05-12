@@ -11,12 +11,38 @@
 
 @implementation CellLabel
 
+-(id)copy
+{
+
+    CellLabel *newCell = [[CellLabel alloc] initWithFrame:self.frame image:self.image text:self.text textColor:self.textColor fontName:self.fontName];
+    
+    [newCell setOpaque:NO];
+    return  newCell;
+}
+
+-(id)initWithFrame:(CGRect)frame
+             image:(UIImage *)image
+              text:(NSString *)text
+         textColor:(UIColor *)textColor
+          fontName:(NSString *)fontname
+{
+    self = [self initWithFrame:frame];
+    if (self) {
+    _image = image;
+    _text = text;
+    _textColor = textColor;
+    _fontName = fontname;
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     [self setUp];
     return self;
 }
+
 
 -(void) setUp {}
 

@@ -41,7 +41,7 @@
 		2C7C51FF170B1002001BB241 /* ShowNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */; };
 		2C7C5201170C021B001BB241 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C5200170C021B001BB241 /* iPad.storyboard */; };
 		2C807057173AE41600BDF9BD /* Jiggling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C807056173AE41600BDF9BD /* Jiggling.m */; };
-		2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95DAEC1730D90C00D6E1CF /* Change log.m */; };
+		2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */; };
 		2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */; };
 		2CD727751718B099006D42D7 /* SmallTileBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727741718B099006D42D7 /* SmallTileBackground.png */; };
 		2CD727781718BE4A006D42D7 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD727771718BE4A006D42D7 /* Note.m */; };
@@ -74,8 +74,8 @@
 		2C41E930173160EA00839DEF /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Motivation.entitlements; sourceTree = "<group>"; };
 		2C4EC2F61737D6B000308A4F /* ColorChooserKeyboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorChooserKeyboardCell.h; sourceTree = "<group>"; };
 		2C4EC2F71737D6B000308A4F /* ColorChooserKeyboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorChooserKeyboardCell.m; sourceTree = "<group>"; };
-		2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesAbstractViewController.h; sourceTree = "<group>"; };
-		2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesAbstractViewController.m; sourceTree = "<group>"; };
+		2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesAbstractViewController.h; path = ../NotesAbstractViewController.h; sourceTree = "<group>"; };
+		2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesAbstractViewController.m; path = ../NotesAbstractViewController.m; sourceTree = "<group>"; };
 		2C58E80E171AFB5800B755CB /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2C59366D170F2AED0078BF0A /* CellLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellLabel.h; sourceTree = "<group>"; };
 		2C59366E170F2AED0078BF0A /* CellLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellLabel.m; sourceTree = "<group>"; };
@@ -104,8 +104,8 @@
 		2C7C5200170C021B001BB241 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		2C807055173AE41600BDF9BD /* Jiggling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jiggling.h; sourceTree = "<group>"; };
 		2C807056173AE41600BDF9BD /* Jiggling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jiggling.m; sourceTree = "<group>"; };
-		2C95DAEB1730D90C00D6E1CF /* Change log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Change log.h"; sourceTree = "<group>"; };
-		2C95DAEC1730D90C00D6E1CF /* Change log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Change log.m"; sourceTree = "<group>"; };
+		2C8F19EE173E967700B2C1ED /* MotivationCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotivationCollectionView.h; sourceTree = "<group>"; };
+		2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotivationCollectionView.m; sourceTree = "<group>"; };
 		2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryKeyboardView.h; sourceTree = "<group>"; };
 		2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessoryKeyboardView.m; sourceTree = "<group>"; };
 		2CD727741718B099006D42D7 /* SmallTileBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallTileBackground.png; sourceTree = "<group>"; };
@@ -145,8 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				2C0A6D2D17385FAC00899E6C /* QuartzCore.framework */,
-				2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */,
-				2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */,
 				2C1B5417169659930006D731 /* Motivation */,
 				2C1B5410169659930006D731 /* Frameworks */,
 				2C1B540E169659930006D731 /* Products */,
@@ -178,25 +176,19 @@
 				2C41E930173160EA00839DEF /* Motivation.entitlements */,
 				2C7C5200170C021B001BB241 /* iPad.storyboard */,
 				2C58E80E171AFB5800B755CB /* iPhone.storyboard */,
-				2CFAFA2317074F3300FB670E /* DocumentManager.h */,
-				2CFAFA2417074F3300FB670E /* DocumentManager.m */,
-				2C95DAEB1730D90C00D6E1CF /* Change log.h */,
-				2C95DAEC1730D90C00D6E1CF /* Change log.m */,
 				2C7C51EF17083B43001BB241 /* MotivationCVC.h */,
+				2C8F19EE173E967700B2C1ED /* MotivationCollectionView.h */,
+				2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */,
 				2C7C51F017083B43001BB241 /* MotivationCVC.m */,
 				2C807055173AE41600BDF9BD /* Jiggling.h */,
 				2C807056173AE41600BDF9BD /* Jiggling.m */,
 				2C0A6D2F173873F300899E6C /* ShakeLayout.h */,
 				2C0A6D30173873F300899E6C /* ShakeLayout.m */,
-				2CFAFA1917072A9900FB670E /* NewNoteViewController.h */,
-				2CFAFA1A17072A9900FB670E /* NewNoteViewController.m */,
 				2CD476DC171F55B60086338C /* ShowNote */,
 				2C59366D170F2AED0078BF0A /* CellLabel.h */,
 				2C59366E170F2AED0078BF0A /* CellLabel.m */,
 				2C7C51F417084C4B001BB241 /* NoteCell.h */,
 				2C7C51F517084C4B001BB241 /* NoteCell.m */,
-				2C7C51F717088DD8001BB241 /* Colors.h */,
-				2C7C51F817088DD8001BB241 /* Colors.m */,
 				2CFAFA2217074EE500FB670E /* Data model */,
 				2C1B5418169659930006D731 /* Supporting Files */,
 				2C67F76B171B683500A34BF4 /* Settings */,
@@ -264,12 +256,18 @@
 		2CD476DC171F55B60086338C /* ShowNote */ = {
 			isa = PBXGroup;
 			children = (
+				2C4EC2F91737E3FD00308A4F /* NotesAbstractViewController.h */,
+				2C4EC2FA1737E3FD00308A4F /* NotesAbstractViewController.m */,
 				2C7C51FD170B1002001BB241 /* ShowNoteViewController.h */,
 				2C7C51FE170B1002001BB241 /* ShowNoteViewController.m */,
+				2CFAFA1917072A9900FB670E /* NewNoteViewController.h */,
+				2CFAFA1A17072A9900FB670E /* NewNoteViewController.m */,
 				2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */,
 				2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */,
 				2C4EC2F61737D6B000308A4F /* ColorChooserKeyboardCell.h */,
 				2C4EC2F71737D6B000308A4F /* ColorChooserKeyboardCell.m */,
+				2C7C51F717088DD8001BB241 /* Colors.h */,
+				2C7C51F817088DD8001BB241 /* Colors.m */,
 			);
 			name = ShowNote;
 			sourceTree = "<group>";
@@ -277,6 +275,8 @@
 		2CFAFA2217074EE500FB670E /* Data model */ = {
 			isa = PBXGroup;
 			children = (
+				2CFAFA2317074F3300FB670E /* DocumentManager.h */,
+				2CFAFA2417074F3300FB670E /* DocumentManager.m */,
 				2CFAFA161706F38500FB670E /* MotivationModel.xcdatamodeld */,
 				2CFAFA1F17074ED800FB670E /* Note+Create.h */,
 				2CFAFA2017074ED800FB670E /* Note+Create.m */,
@@ -385,11 +385,11 @@
 				2CD727781718BE4A006D42D7 /* Note.m in Sources */,
 				2CD7278B171A0143006D42D7 /* Settings.m in Sources */,
 				2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */,
-				2C95DAED1730D90C00D6E1CF /* Change log.m in Sources */,
 				2C4EC2F81737D6B000308A4F /* ColorChooserKeyboardCell.m in Sources */,
 				2C4EC2FB1737E3FD00308A4F /* NotesAbstractViewController.m in Sources */,
 				2C0A6D31173873F300899E6C /* ShakeLayout.m in Sources */,
 				2C807057173AE41600BDF9BD /* Jiggling.m in Sources */,
+				2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
