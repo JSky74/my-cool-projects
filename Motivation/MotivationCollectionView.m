@@ -9,7 +9,7 @@
 #import "MotivationCollectionView.h"
 #import "CellLabel.h"
 #import "NoteCell.h"
-
+#import "Transforms.h"
 @interface MotivationCollectionView ()
 
 @property (nonatomic) CGPoint locationOfTouch;
@@ -24,7 +24,7 @@
 @implementation MotivationCollectionView 
 
 @synthesize userWillStartLongPressGesture = _userWillStartLongPressGesture;
-#define ENLARGMENT_SCALEFACTOR 1.1
+#define ENLARGMENT_SCALEFACTOR 1.1 //Defined in NoteCell as well
 
 
 -(BOOL)userWillStartLongPressGesture
@@ -53,7 +53,7 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
      
     [self.cell setHidden:YES];
     
-    self.cell.transform = CGAffineTransformMakeScale(ENLARGMENT_SCALEFACTOR, ENLARGMENT_SCALEFACTOR);
+    self.cell.transform = [Transforms transformForView:self.cell rotateAndScaleWithScaleFactor:CGSizeMake(ENLARGMENT_SCALEFACTOR, ENLARGMENT_SCALEFACTOR)];
     [self addSubview:self.cell];
     
     
@@ -73,6 +73,7 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
     if (longPress.state ==UIGestureRecognizerStateEnded)
     {
         CGPoint gestureEndedInPoint = [longPress locationInView:self];
+        //CGPoint offsetYEndPoint = CGPointMake(gestureEndedInPoint.x, gestureEndedInPoint.y+self.cell.bounds.size.height/2);
         NSString *pointValue = NSStringFromCGPoint(gestureEndedInPoint);
         NSIndexPath *indexToDelete = [self indexPathForCell:self.note];
         
@@ -80,17 +81,17 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
         NSArray *keys = [NSArray arrayWithObjects:@"GestureEndedAtPoint", @"IndexToDelete", nil];
         
         NSIndexPath *insertAtIndex = [self indexPathForItemAtPoint:gestureEndedInPoint];
-        
-        if (insertAtIndex) {
+        //NSIndexPath *modifiedInsertAtIndex = [self indexPathForItemAtPoint:x]
+        if (insertAtIndex && !([insertAtIndex isEqual:indexToDelete])) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UserWillChangeLayout" object:self userInfo:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
 
         } 
         
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        //[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         
-        [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             if (insertAtIndex) {
-                self.cell.frame = [self cellForItemAtIndexPath:insertAtIndex].frame;
+                //self.cell.frame = [self cellForItemAtIndexPath:insertAtIndex].frame;
             } else
             {
                 self.cell.frame = self.note.frame;
@@ -99,7 +100,7 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
             
             
         } completion:^(BOOL finished){
-                        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                        //[[UIApplication sharedApplication] endIgnoringInteractionEvents];
                         [self.cell removeFromSuperview];
         
                             [self.note setHidden:NO];
@@ -145,6 +146,7 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
     if (!_longPressGesture) {
      _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handeLongPressGesture:)];
         [_longPressGesture setEnabled:YES];
+        [_longPressGesture setMinimumPressDuration:0.1];
        
     }
     return _longPressGesture;

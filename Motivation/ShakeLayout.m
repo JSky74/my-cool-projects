@@ -24,27 +24,20 @@
 -(BOOL)shake
 {
     if (!_shake) _shake = NO;
-    //[self invalidateLayout];
     return _shake;
 }
 -(void)setShake:(BOOL)shake
 {
     _shake = shake;
-    //[self invalidateLayout];
 }
 
 
 - (UICollectionViewLayoutAttributes *) layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    //NoteCell*  cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-    
+    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];    
     if (self.shake) {
         [self applyTransformToLayoutAttributes:attributes];
     }
-//    if (cell.enlarged]) {
-//        [attributes.center =  ];
-//    }
     
     return attributes;
     
@@ -89,23 +82,5 @@
     }
  
 }
-
-
-
-//-(void) enlargeCell:(UICollectionViewLayoutAttributes *)layoutAttributes
-//{
-//
-//    CATransform3D scale = CATransform3DMakeScale(1.05, 1.05, 1);
-//    
-//    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-//        layoutAttributes.transform3D  = scale;
-//    } completion:^(BOOL finished){
-//        
-//    }];
-//
-//
-//}
-
-
 
 @end

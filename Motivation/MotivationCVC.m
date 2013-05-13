@@ -52,8 +52,22 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize sizeOfCell = CGSizeMake(168, 125); //168,125
+    CGSize sizeOfCell = CGSizeZero;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+         sizeOfCell = CGSizeMake(168, 125); //168,125
+    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        sizeOfCell = CGSizeMake(190, 150);
+    }
+   
     return sizeOfCell;
+}
+
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(50.0, 50.0, 50.0, 30.0);
 }
 
 -(ShakeLayout *)myLayout
@@ -126,12 +140,13 @@
     if ([cell isKindOfClass:[NoteCell class]]) {
         NoteCell *noteCell = (NoteCell *)cell;
         
-        noteCell.jigglingEnabled = self.cellsAreJiggling;
-        
+        [noteCell setJigglingEnabled:self.cellsAreJiggling];
+
         noteCell.label.text = note.text;
         noteCell.label.textColor = [UIColor darkTextColor];
         [noteCell.label setImage:[self.color.noteImages objectForKey:note.color]];
         [noteCell.label setFontName:[Settings retrieveFromUserDefaults:@"font_preference"]];
+        [noteCell setSelected:NO]; ///???
     
     }
 
@@ -230,9 +245,10 @@
         sender.tintColor = nil;
         self.motivationCollectionView.allowsMultipleSelection = NO;
         self.trashButton.enabled = NO;
-        [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:NO]];
         [self setCellsAreJiggling:[NSNumber numberWithBool:NO]];
-        [self.motivationCollectionView reloadData];
+        
+        [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:NO]];
+        
         [self.motivationCollectionView removeLongPressGestureRecognizer];
 
         
@@ -241,8 +257,6 @@
 
 -(void )userWillChangeLayout:(NSNotification *) pointDictionary
 {
-//    NSArray *objects = [NSArray arrayWithObjects:pointValue, indexToDelete,nil];
-//    NSArray *keys = [NSArray arrayWithObjects:@"GestureEndedAtPoint", @"IndexToDelete", nil];
     
     CGPoint endPoint = CGPointFromString([pointDictionary.userInfo valueForKey:@"GestureEndedAtPoint"]);
     NSIndexPath *indexToDelete = [pointDictionary.userInfo valueForKey:@"IndexToDelete"];
@@ -250,24 +264,22 @@
     
     NSIndexPath *newLocation = [self.motivationCollectionView indexPathForItemAtPoint:endPoint];
     if (newLocation) {
-        NSMutableArray *dataModel = [[NSMutableArray alloc] initWithArray:self.arrayOfNotesFromCoreData];
-        Note *noteToMove = (Note *)[self.arrayOfNotesFromCoreData objectAtIndex:indexToDelete.item];
-        
-        [dataModel removeObjectAtIndex:indexToDelete.item];
-        self.arrayOfNotesFromCoreData = [dataModel copy];
-        [self.motivationCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObjects:indexToDelete, nil]];
-        
-        [dataModel insertObject:noteToMove atIndex:indexToInsert.item];
-        self.arrayOfNotesFromCoreData = [dataModel copy];
-        
-
-        
-        [self.motivationCollectionView  insertItemsAtIndexPaths:[NSArray arrayWithObjects:indexToInsert, nil]];
-        //[self updateVisibleCells];
-    }
     
+            NSMutableArray *dataModel = [[NSMutableArray alloc] initWithArray:self.arrayOfNotesFromCoreData];
+            Note *noteToMove = (Note *)[self.arrayOfNotesFromCoreData objectAtIndex:indexToDelete.item];
+            
+            [dataModel removeObjectAtIndex:indexToDelete.item];
+            self.arrayOfNotesFromCoreData = [dataModel copy];
+            [self.motivationCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObjects:indexToDelete, nil]];
+            
+            [dataModel insertObject:noteToMove atIndex:indexToInsert.item];
+            self.arrayOfNotesFromCoreData = [dataModel copy];
+            
+            [self.motivationCollectionView  insertItemsAtIndexPaths:[NSArray arrayWithObjects:indexToInsert, nil]];
+            //[self updateVisibleCells]; //makes things slow but preserves jiggling
+                
+            }
     
-
 }
 
 
@@ -401,7 +413,7 @@
     {
         //data from ubiquity
         [self.motivationCollectionView reloadData];
-        [self performSelector:@selector(shakeCells) withObject:nil afterDelay:1];
+        //[self performSelector:@selector(shakeCells) withObject:nil afterDelay:1.0];
     }
     
     NSLog(@"UI updated");
@@ -564,8 +576,9 @@ for (int i = 0; i < resultCount; i++) {
 
     
   self.motivationCollectionView.dataSource = self;
-  [self.motivationCollectionView setCollectionViewLayout:self.myLayout];
+  //[self.motivationCollectionView setCollectionViewLayout:self.myLayout];
   self.motivationCollectionView.delegate = self;
+  [self setCellsAreJiggling:[NSNumber numberWithBool:NO]];
   self.actionSheet.delegate  = self;
   self.trashButton.enabled = NO;
   

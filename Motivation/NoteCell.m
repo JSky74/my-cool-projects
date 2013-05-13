@@ -8,6 +8,7 @@
 
 #import "NoteCell.h"
 #import "MotivationCollectionView.h"
+#import "Transforms.h"
 
 @interface NoteCell ()
 @property CGAffineTransform conCatTransform;
@@ -20,7 +21,7 @@
 
 @implementation NoteCell
 
-#define ENLARGMENT_SCALEFACTOR 1.1
+#define ENLARGMENT_SCALEFACTOR 1.1 //Defined in CollectioView as well
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -58,29 +59,32 @@
              yScale = 1.0;
         }
         
-        
-    CGAffineTransform scale = CGAffineTransformMakeScale(xScale, yScale);
-    
-    [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn animations:^{
-        self.transform  = scale;
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn animations:^{
+        self.transform  = [Transforms transformForView:self rotateAndScaleWithScaleFactor:CGSizeMake(xScale, yScale)];
     } completion:^(BOOL finished){ }];
 }
 
+
+
+
+
 -(void)setJigglingEnabled:(NSNumber *)jigglingEnabled
 {
+
     _jigglingEnabled = jigglingEnabled;
     [self startJiggling];
-  
+   
 }
 
 -(void)startJiggling
 {
- 
+if ([self.jigglingEnabled boolValue]) {
+            
 #define kAnimationRotateDeg 0.5
 #define kAnimationTranslateX 1.0
 #define kAnimationTranslateY 1.0
     
-    if ([self.jigglingEnabled boolValue]) {
+    
         
     int count = 1;
     
@@ -89,20 +93,30 @@
     CGAffineTransform moveTransform = CGAffineTransformTranslate(rightWobble, -kAnimationTranslateX, -kAnimationTranslateY);
     CGAffineTransform conCatTransform = CGAffineTransformConcat(rightWobble, moveTransform);
     
-    self.transform = leftWobble; //starting point
+    self.transform = leftWobble; //starting point //could be omitted if I want to have this code in Transforms
     _conCatTransform = conCatTransform;
     
     [UIView animateWithDuration:0.1 delay:(count * 0.08)
                         options:UIViewAnimationOptionAllowUserInteraction |             UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
-                     animations:^{self.transform = conCatTransform;} completion:NULL];
-    } 
+                     animations:^{self.transform = conCatTransform;}
+                     completion:^(BOOL finished){ //completion can be removed
+                         if(![self.jigglingEnabled boolValue]){
+                             [self.layer removeAllAnimations];
+                             self.transform = CGAffineTransformIdentity;
+                                                       }
+                     }];
+} else {
+        [self.layer removeAllAnimations];
+        self.transform = CGAffineTransformIdentity;
+
+        }
     
 }
 
 
--(double) degreesToRadians:(double) radians
+-(double) degreesToRadians:(double) degrees
 {
-    return (M_PI *(radians) / 180);
+    return (M_PI *(degrees) / 180);
 }
 
 

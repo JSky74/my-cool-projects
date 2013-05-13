@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "CellLabel.h"   
 
 
 @interface NoteCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet CellLabel *label;
-
 @property (nonatomic, strong) NSNumber *jigglingEnabled;
+
 
 -(void) enlargeCell:(BOOL) enlarge;
 

@@ -42,6 +42,7 @@
 		2C7C5201170C021B001BB241 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C5200170C021B001BB241 /* iPad.storyboard */; };
 		2C807057173AE41600BDF9BD /* Jiggling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C807056173AE41600BDF9BD /* Jiggling.m */; };
 		2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */; };
+		2C8F19F31740C26D00B2C1ED /* Transforms.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F19F21740C26D00B2C1ED /* Transforms.m */; };
 		2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */; };
 		2CD727751718B099006D42D7 /* SmallTileBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727741718B099006D42D7 /* SmallTileBackground.png */; };
 		2CD727781718BE4A006D42D7 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD727771718BE4A006D42D7 /* Note.m */; };
@@ -106,6 +107,8 @@
 		2C807056173AE41600BDF9BD /* Jiggling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jiggling.m; sourceTree = "<group>"; };
 		2C8F19EE173E967700B2C1ED /* MotivationCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotivationCollectionView.h; sourceTree = "<group>"; };
 		2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotivationCollectionView.m; sourceTree = "<group>"; };
+		2C8F19F11740C26D00B2C1ED /* Transforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transforms.h; sourceTree = "<group>"; };
+		2C8F19F21740C26D00B2C1ED /* Transforms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transforms.m; sourceTree = "<group>"; };
 		2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryKeyboardView.h; sourceTree = "<group>"; };
 		2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessoryKeyboardView.m; sourceTree = "<group>"; };
 		2CD727741718B099006D42D7 /* SmallTileBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallTileBackground.png; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				2C59366E170F2AED0078BF0A /* CellLabel.m */,
 				2C7C51F417084C4B001BB241 /* NoteCell.h */,
 				2C7C51F517084C4B001BB241 /* NoteCell.m */,
+				2C8F19F11740C26D00B2C1ED /* Transforms.h */,
+				2C8F19F21740C26D00B2C1ED /* Transforms.m */,
 				2CFAFA2217074EE500FB670E /* Data model */,
 				2C1B5418169659930006D731 /* Supporting Files */,
 				2C67F76B171B683500A34BF4 /* Settings */,
@@ -390,6 +395,7 @@
 				2C0A6D31173873F300899E6C /* ShakeLayout.m in Sources */,
 				2C807057173AE41600BDF9BD /* Jiggling.m in Sources */,
 				2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */,
+				2C8F19F31740C26D00B2C1ED /* Transforms.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
