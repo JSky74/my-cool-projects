@@ -13,4 +13,6 @@
 + (CGAffineTransform) transformForView:(UIView *) view
          rotateAndScaleWithScaleFactor:(CGSize) scaleFactor;
 
++  (CGFloat) enlargementScaleFactor;
+
 @end

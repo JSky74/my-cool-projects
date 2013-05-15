@@ -56,6 +56,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [self setOpaque:NO];
     [self.image drawInRect:self.bounds];
     [self.textColor set];
     

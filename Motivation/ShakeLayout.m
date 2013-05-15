@@ -9,7 +9,13 @@
 #import "ShakeLayout.h"
 #import "NoteCell.h"
 
+@interface ShakeLayout()
+@property int indexOfCellToHide;
+@end
+
+
 @implementation ShakeLayout
+
 @synthesize shake = _shake;
 -(id) init
 {
@@ -31,6 +37,12 @@
     _shake = shake;
 }
 
+-(void)setLayoutShouldHideCell:(NSNumber *)layoutShouldHideCell
+{
+    _layoutShouldHideCell = layoutShouldHideCell;
+    [self invalidateLayout];
+}
+
 
 - (UICollectionViewLayoutAttributes *) layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -38,7 +50,12 @@
     if (self.shake) {
         [self applyTransformToLayoutAttributes:attributes];
     }
-    
+    if (self.layoutShouldHideCell) {
+        if ([[NSNumber numberWithInt:indexPath.item] isEqualToNumber:self.layoutShouldHideCell]) {
+        [attributes setHidden:YES];
+        }
+    }
+       
     return attributes;
     
 }
@@ -52,15 +69,29 @@
         if (self.shake) {
             [self applyTransformToLayoutAttributes:cellAttributes];
         }
-//        if ([[self.collectionView cellForItemAtIndexPath:cellAttributes.indexPath] isHighlighted]) {
-//            [self enlargeCell:cellAttributes];
-//        }
-        
-    }
+        if (self.layoutShouldHideCell){
+            if ([[NSNumber numberWithInt:cellAttributes.indexPath.item]
+                 isEqualToNumber:self.layoutShouldHideCell]) {
+               [cellAttributes setHidden:YES];
+            }
+            
+            }
+        }
  return allAttributesInRect;
 }
 
 
+
+//- (UICollectionViewLayoutAttributes
+//   *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+//{
+//    UICollectionViewLayoutAttributes* attributes = [self
+//                                                    layoutAttributesForItemAtIndexPath:itemIndexPath];
+//    attributes.alpha = 0.0;
+//    //CGSize size = [self collectionView].frame.size;
+//    //attributes.center = CGPointMake(size.width / 2.0, size.height / 2.0);
+//    return attributes;
+//}
 
 
 
@@ -69,6 +100,7 @@
     _transform3D = transform;
     [self invalidateLayout];
 }
+
 
 -(void) applyTransformToLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
 {

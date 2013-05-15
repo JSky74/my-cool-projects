@@ -156,11 +156,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
          landmarkName = "-actionSheet:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -169,11 +169,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/CellLabel.m"
-         timestampString = "389992888.513865"
+         timestampString = "390154600.172221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "-drawRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -182,11 +182,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/CellLabel.m"
-         timestampString = "389992888.513865"
+         timestampString = "390154600.172221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-drawRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -195,7 +195,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/NoteCell.h"
-         timestampString = "390127317.807741"
+         timestampString = "390267604.464471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "23"
@@ -234,11 +234,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/CellLabel.m"
-         timestampString = "389992888.513865"
+         timestampString = "390154600.172221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-drawRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -708,11 +708,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390309782.121692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-layoutAttributesForItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -721,11 +721,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390309910.171452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "-layoutAttributesForItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -734,11 +734,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390309910.171452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "-layoutAttributesForElementsInRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -747,11 +747,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390309910.171452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-layoutAttributesForElementsInRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -760,11 +760,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390317525.136573"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
          landmarkName = "-layoutAttributesForElementsInRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -773,11 +773,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/ShakeLayout.m"
-         timestampString = "390117772.27348"
+         timestampString = "390317766.145182"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
          landmarkName = "-setTransform3D:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -786,11 +786,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-collectionView:didSelectItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -799,12 +799,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
-         landmarkName = "-collectionView:cellForItemAtIndexPath:"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
+         landmarkName = "-updateCell:usingNote:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -812,25 +812,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390321037.320932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305"
-         landmarkName = "-arrayOfNotesFromCoreData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/NoteCell.m"
-         timestampString = "390120727.481987"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26"
-         landmarkName = "-initWithFrame:"
+         startingLineNumber = "311"
+         endingLineNumber = "311"
+         landmarkName = "-setDocument:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -838,12 +825,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
-         landmarkName = "-collectionView:cellForItemAtIndexPath:"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-updateCell:usingNote:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -851,11 +838,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/CellLabel.m"
-         timestampString = "389992888.513865"
+         timestampString = "390154600.172221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
          landmarkName = "-drawRect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -864,11 +851,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390321037.320932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "417"
-         endingLineNumber = "417"
+         startingLineNumber = "423"
+         endingLineNumber = "423"
+         landmarkName = "-updateVisibleCells"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390321037.320932"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "407"
+         endingLineNumber = "407"
          landmarkName = "-updateUI:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -877,24 +877,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "401"
-         endingLineNumber = "401"
-         landmarkName = "@implementation MotivationCVC"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "101"
+         endingLineNumber = "101"
          landmarkName = "-collectionView:didUnhighlightItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -903,11 +890,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-collectionView:didHighlightItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -916,25 +903,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390321037.320932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "590"
-         endingLineNumber = "590"
-         landmarkName = "-panGestureDiscovered"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
-         landmarkName = "-userRequestsChangeButton:"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
+         landmarkName = "-userWillChangeLayout:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -942,12 +916,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/NoteCell.m"
-         timestampString = "390120727.481987"
+         timestampString = "390307069.381971"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-enlargeCell:"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
+         landmarkName = "-startJiggling"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -955,11 +929,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/NoteCell.m"
-         timestampString = "390120727.481987"
+         timestampString = "390307069.381971"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
          landmarkName = "-enlargeCell:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -968,20 +942,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
-         landmarkName = "-collectionView:didSelectItemAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "94"
@@ -994,12 +955,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "258"
-         endingLineNumber = "258"
-         landmarkName = "-userWillChangeLayout:"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-collectionView:didUnhighlightItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1007,7 +968,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390321037.320932"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "286"
+         endingLineNumber = "286"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390321037.320932"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "286"
+         endingLineNumber = "286"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390321037.320932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "262"
@@ -1020,102 +1007,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
-         landmarkName = "-userWillChangeLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCollectionView.m"
-         timestampString = "390082556.184203"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
-         landmarkName = "-handeLongPressGesture:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "280"
-         endingLineNumber = "280"
-         landmarkName = "-userWillChangeLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCollectionView.m"
-         timestampString = "390082556.184203"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "-handeLongPressGesture:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "280"
-         endingLineNumber = "280"
-         landmarkName = "-userWillChangeLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCollectionView.m"
-         timestampString = "390082556.184203"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "-handeLongPressGesture:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "251"
-         endingLineNumber = "251"
-         landmarkName = "-userRequestsChangeButton:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-updateCell:usingNote:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1124,12 +1020,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/NoteCell.m"
-         timestampString = "390131264.554274"
+         timestampString = "390307069.381971"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
-         landmarkName = "-startJiggling"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "@implementation NoteCell"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390308201.250424"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
+         landmarkName = "-updateCell:usingNote:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/NoteCell.m"
+         timestampString = "390307069.381971"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "-setSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/NoteCell.m"
+         timestampString = "390307069.381971"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "-prepareForReuse"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1137,12 +1072,272 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Motivation/MotivationCVC.m"
-         timestampString = "390146414.061374"
+         timestampString = "390308201.250424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "138"
          endingLineNumber = "138"
-         landmarkName = "-updateCell:usingNote:"
+         landmarkName = "@implementation MotivationCVC"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390308201.250424"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-myLayout"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390321037.320932"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "586"
+         endingLineNumber = "586"
+         landmarkName = "@implementation MotivationCVC"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390308201.250424"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390309782.121692"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/ShakeLayout.m"
+         timestampString = "390317766.145182"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "@implementation ShakeLayout"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "110"
+         endingLineNumber = "110"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390322857.701045"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390322857.701045"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCVC.m"
+         timestampString = "390321037.320932"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
+         landmarkName = "-userWillChangeLayout:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "120"
+         endingLineNumber = "120"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390330238.168729"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-handeLongPressGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Motivation/MotivationCollectionView.m"
+         timestampString = "390331218.198714"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-handeLongPressGesture:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

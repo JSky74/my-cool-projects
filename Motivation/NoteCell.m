@@ -21,7 +21,13 @@
 
 @implementation NoteCell
 
-#define ENLARGMENT_SCALEFACTOR 1.1 //Defined in CollectioView as well
+
+-(void)prepareForReuse
+{
+    self.jigglingEnabled = NO;
+    self.enlarged = NO;
+}
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -51,15 +57,15 @@
     
     if (self.enlarged)
     {
-        xScale = ENLARGMENT_SCALEFACTOR;
-        yScale = ENLARGMENT_SCALEFACTOR;
+        xScale = [Transforms enlargementScaleFactor];
+        yScale = [Transforms enlargementScaleFactor];
     } else
         {
              xScale = 1.0;
              yScale = 1.0;
         }
         
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.4 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn animations:^{
         self.transform  = [Transforms transformForView:self rotateAndScaleWithScaleFactor:CGSizeMake(xScale, yScale)];
     } completion:^(BOOL finished){ }];
 }
@@ -70,9 +76,12 @@
 
 -(void)setJigglingEnabled:(NSNumber *)jigglingEnabled
 {
-
-    _jigglingEnabled = jigglingEnabled;
-    [self startJiggling];
+    if (!(_jigglingEnabled == jigglingEnabled)) {
+        
+        _jigglingEnabled = jigglingEnabled;
+        [self startJiggling];
+    }
+    
    
 }
 
@@ -80,7 +89,7 @@
 {
 if ([self.jigglingEnabled boolValue]) {
             
-#define kAnimationRotateDeg 0.5
+#define kAnimationRotateDeg 1.0
 #define kAnimationTranslateX 1.0
 #define kAnimationTranslateY 1.0
     

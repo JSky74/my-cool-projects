@@ -25,6 +25,10 @@
     return scaleAndRotate;
 }
 
++ (CGFloat)enlargementScaleFactor
+{
+    return ENLARGMENT_SCALEFACTOR;
+}
 
 //+ (CGAffineTransform) transformJigglingForView:(UIView *)view
 //{

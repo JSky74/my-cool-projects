@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSNumber *cellsAreJiggling;
 @property (strong, nonatomic) NSMutableArray *tempArray;
 
+
 @property BOOL noteInserted;
 @end
 
@@ -255,32 +256,30 @@
     }
 }
 
+
+
+
 -(void )userWillChangeLayout:(NSNotification *) pointDictionary
 {
-    
-    CGPoint endPoint = CGPointFromString([pointDictionary.userInfo valueForKey:@"GestureEndedAtPoint"]);
-    NSIndexPath *indexToDelete = [pointDictionary.userInfo valueForKey:@"IndexToDelete"];
-    NSIndexPath *indexToInsert = [self.motivationCollectionView indexPathForItemAtPoint:endPoint];
-    
-    NSIndexPath *newLocation = [self.motivationCollectionView indexPathForItemAtPoint:endPoint];
-    if (newLocation) {
-    
-            NSMutableArray *dataModel = [[NSMutableArray alloc] initWithArray:self.arrayOfNotesFromCoreData];
-            Note *noteToMove = (Note *)[self.arrayOfNotesFromCoreData objectAtIndex:indexToDelete.item];
-            
-            [dataModel removeObjectAtIndex:indexToDelete.item];
-            self.arrayOfNotesFromCoreData = [dataModel copy];
-            [self.motivationCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObjects:indexToDelete, nil]];
-            
-            [dataModel insertObject:noteToMove atIndex:indexToInsert.item];
-            self.arrayOfNotesFromCoreData = [dataModel copy];
-            
-            [self.motivationCollectionView  insertItemsAtIndexPaths:[NSArray arrayWithObjects:indexToInsert, nil]];
-            //[self updateVisibleCells]; //makes things slow but preserves jiggling
-                
-            }
-    
-}
+      CGPoint currentPoint = CGPointFromString([pointDictionary.userInfo valueForKey:@"CurrentCGPointValueString"]);
+      NSIndexPath *indexToMoveFrom =           [pointDictionary.userInfo valueForKey:@"IndexToMoveFrom"];
+      
+      NSIndexPath *newLocation = [self.motivationCollectionView indexPathForItemAtPoint:currentPoint];
+      
+      if (newLocation)
+      {
+          NSMutableArray *dataModel = [[NSMutableArray alloc] initWithArray:self.arrayOfNotesFromCoreData];
+          Note *noteToMove = (Note *)[self.arrayOfNotesFromCoreData objectAtIndex:indexToMoveFrom.item];
+          
+          [dataModel removeObjectAtIndex:indexToMoveFrom.item];
+          [dataModel insertObject:noteToMove atIndex:newLocation.item];
+          
+          self.arrayOfNotesFromCoreData = [dataModel copy];
+          [self.motivationCollectionView moveItemAtIndexPath:indexToMoveFrom toIndexPath:newLocation];
+      }
+}   
+
+
 
 
 
@@ -574,9 +573,8 @@ for (int i = 0; i < resultCount; i++) {
     
 
 
-    
+  [self.motivationCollectionView setCollectionViewLayout:self.myLayout];
   self.motivationCollectionView.dataSource = self;
-  //[self.motivationCollectionView setCollectionViewLayout:self.myLayout];
   self.motivationCollectionView.delegate = self;
   [self setCellsAreJiggling:[NSNumber numberWithBool:NO]];
   self.actionSheet.delegate  = self;

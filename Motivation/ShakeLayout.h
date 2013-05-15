@@ -14,4 +14,6 @@
 @property (nonatomic) CATransform3D transform3D;
 @property (nonatomic) CATransform3D originalTransform;
 
+@property (nonatomic, strong) NSNumber *layoutShouldHideCell;
+
 @end

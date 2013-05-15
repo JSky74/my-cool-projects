@@ -10,21 +10,23 @@
 #import "CellLabel.h"
 #import "NoteCell.h"
 #import "Transforms.h"
+#import "ShakeLayout.h"
 @interface MotivationCollectionView ()
 
 @property (nonatomic) CGPoint locationOfTouch;
-@property (strong, nonatomic) NSIndexPath *cellToMove;
 
-@property (strong, nonatomic) CellLabel* cell;
+@property (strong, nonatomic) NSIndexPath *indexOfNote;
+@property (strong, nonatomic) CellLabel* noteProxy;
 @property (strong, nonatomic) NoteCell *note;
-
 
 @end
 
 @implementation MotivationCollectionView 
 
 @synthesize userWillStartLongPressGesture = _userWillStartLongPressGesture;
-#define ENLARGMENT_SCALEFACTOR 1.1 //Defined in NoteCell as well
+
+
+
 
 
 -(BOOL)userWillStartLongPressGesture
@@ -39,88 +41,109 @@
     NSLog(@"LongPress***%@", self.longPressGesture);
 }
 
+
+
+
+
 -(void)handeLongPressGesture:(UILongPressGestureRecognizer *) longPress
 {
-
-if (longPress.state == UIGestureRecognizerStateBegan) {
+    static NSIndexPath *indexToMoveTo;
+    static NSIndexPath *currentIndexOfMovingProxy;
+    static CGRect indexToMoveToFrame;
+    static BOOL firstTouch;
     
-    [self setLocationOfTouch:[longPress locationInView:self]];
-    [self setCellToMove:[self indexPathForItemAtPoint:self.locationOfTouch]];
+    if (longPress.state == UIGestureRecognizerStateBegan)
+    {
+        [self setLocationOfTouch:[longPress locationInView:self]];
+        [self setIndexOfNote:[self indexPathForItemAtPoint:self.locationOfTouch]];
+        [self setNote:(NoteCell *)[self cellForItemAtIndexPath:self.indexOfNote]];
+        [self setNoteProxy:[self.note.label copy]];
+        [self.noteProxy setFrame:self.note.frame];
     
-    [self setNote:(NoteCell *)[self cellForItemAtIndexPath:self.cellToMove]];
-    [self.note enlargeCell:YES];
-    [self setCell:[self.note.label copy]];
-     
-    [self.cell setHidden:YES];
-    
-    self.cell.transform = [Transforms transformForView:self.cell rotateAndScaleWithScaleFactor:CGSizeMake(ENLARGMENT_SCALEFACTOR, ENLARGMENT_SCALEFACTOR)];
-    [self addSubview:self.cell];
-    
-    
-    }
-    
-    
-    if (longPress.state ==UIGestureRecognizerStateChanged) {
+        [UIView animateWithDuration:0.4 animations:^{
+                            self.noteProxy.transform = [Transforms transformForView:self.noteProxy
+                               rotateAndScaleWithScaleFactor:CGSizeMake([Transforms enlargementScaleFactor],
+                                                                        [Transforms enlargementScaleFactor])];
+        }];
         
-        
-        //[self deleteItemsAtIndexPaths:[NSArray arrayWithObject:self.cellToMove]];
-        
-        self.cell.center = [longPress locationInView:self];
-        [self.cell setHidden:NO];
+        [self addSubview:self.noteProxy];
+        currentIndexOfMovingProxy = [self indexPathForCell:self.note];
+        indexToMoveTo = currentIndexOfMovingProxy;
+        indexToMoveToFrame = self.note.frame;
         [self.note setHidden:YES];
-        
+        firstTouch = YES;
     }
+    
+    
+    if (longPress.state == UIGestureRecognizerStateChanged) {
+        
+        CGPoint touchPoint = [longPress locationInView:self];
+        static CGPoint offset;
+        if (firstTouch) {
+            offset = CGPointMake(self.noteProxy.center.x - touchPoint.x, self.note.center.y-touchPoint.y);
+            self.noteProxy.center = CGPointMake(touchPoint.x-offset.x, touchPoint.y-offset.y);
+            firstTouch = NO;
+        } else
+        {
+            self.noteProxy.center = CGPointMake(touchPoint.x+offset.x, touchPoint.y+offset.y);
+        }
+        
+        NSIndexPath *indexToMoveFrom = currentIndexOfMovingProxy;
+        CGPoint currentTouchLocation = [longPress locationInView:self];
+        NSString *currentCGPointValueString = NSStringFromCGPoint(currentTouchLocation);
+        
+        indexToMoveTo = [self indexPathForItemAtPoint:currentTouchLocation];
+     
+        //test that objects and keys are 2 before sending a notification otherwise CRASH! Klart.
+    
+        // ** AVOID SUBCLASING COLLECTION VIEW **! ///
+        
+        if (indexToMoveTo && !([indexToMoveTo isEqual:indexToMoveFrom])) {
+        if (CGRectContainsRect(self.noteProxy.frame, [self cellForItemAtIndexPath:indexToMoveTo].frame)) {
+        
+            NSArray *objects = [NSArray arrayWithObjects:currentCGPointValueString, indexToMoveFrom, nil];
+            NSArray *keys = [NSArray arrayWithObjects:@"CurrentCGPointValueString", @"IndexToMoveFrom", nil];
+            
+                if ([objects count] == 2 && [keys count] ==2) {
+                    
+                    indexToMoveToFrame = ([self cellForItemAtIndexPath:indexToMoveTo]).frame;
+                    [(ShakeLayout *)self.collectionViewLayout setLayoutShouldHideCell:[NSNumber numberWithInt:indexToMoveTo.item]];
+                    currentIndexOfMovingProxy = indexToMoveTo;
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UserWillChangeLayout" object:self userInfo:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
+    
+                }
+            }
+    }
+}
+    
     if (longPress.state ==UIGestureRecognizerStateEnded)
     {
-        CGPoint gestureEndedInPoint = [longPress locationInView:self];
-        //CGPoint offsetYEndPoint = CGPointMake(gestureEndedInPoint.x, gestureEndedInPoint.y+self.cell.bounds.size.height/2);
-        NSString *pointValue = NSStringFromCGPoint(gestureEndedInPoint);
-        NSIndexPath *indexToDelete = [self indexPathForCell:self.note];
-        
-        NSArray *objects = [NSArray arrayWithObjects:pointValue, indexToDelete,nil];
-        NSArray *keys = [NSArray arrayWithObjects:@"GestureEndedAtPoint", @"IndexToDelete", nil];
-        
-        NSIndexPath *insertAtIndex = [self indexPathForItemAtPoint:gestureEndedInPoint];
-        //NSIndexPath *modifiedInsertAtIndex = [self indexPathForItemAtPoint:x]
-        if (insertAtIndex && !([insertAtIndex isEqual:indexToDelete])) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserWillChangeLayout" object:self userInfo:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
-
-        } 
-        
-        //[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        
-        [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            if (insertAtIndex) {
-                //self.cell.frame = [self cellForItemAtIndexPath:insertAtIndex].frame;
-            } else
-            {
-                self.cell.frame = self.note.frame;
-                
-            }
             
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            if (indexToMoveTo)
+                {
+                    self.noteProxy.transform = CGAffineTransformIdentity;
+                    self.noteProxy.frame = indexToMoveToFrame;
+                } else
+                {
+                    self.noteProxy.frame = self.note.frame;
+                }
             
         } completion:^(BOOL finished){
-                        //[[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                        [self.cell removeFromSuperview];
-        
+                            [(ShakeLayout *)self.collectionViewLayout setLayoutShouldHideCell:nil];
+                            [self.noteProxy removeFromSuperview];
                             [self.note setHidden:NO];
                             [self.note enlargeCell:NO];
+            
             
         }];
         
      }
+
 }
 
 
-//-(void) restoreNoteCell:(NSIndexPath *) indexPathOfCell
-//{
-//    
-//    NoteCell *noteCell = (NoteCell *)[self cellForItemAtIndexPath:indexPathOfCell];
-//    
-//    [noteCell enlargeCell:NO]; //same as in did Unhighlight, restore to the original values.
-//    noteCell.label.selected = !noteCell.label.selected;
-//
-//}
 
 -(void) addLongPressGestureRecognizer
 {
@@ -147,7 +170,6 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
      _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handeLongPressGesture:)];
         [_longPressGesture setEnabled:YES];
         [_longPressGesture setMinimumPressDuration:0.1];
-       
     }
     return _longPressGesture;
 }
@@ -159,7 +181,7 @@ if (longPress.state == UIGestureRecognizerStateBegan) {
     NSArray* recognizers = [self gestureRecognizers];
     
     for (UIGestureRecognizer* aRecognizer in recognizers) {
-        if ([aRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+        if ([aRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
             if ([aRecognizer isEqual:self.longPressGesture]) {
                 [self removeGestureRecognizer:aRecognizer];
             }
