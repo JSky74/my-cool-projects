@@ -275,7 +275,7 @@
           [dataModel insertObject:noteToMove atIndex:newLocation.item];
           
           self.arrayOfNotesFromCoreData = [dataModel copy];
-          [self.motivationCollectionView moveItemAtIndexPath:indexToMoveFrom toIndexPath:newLocation];
+          [self.motivationCollectionView reloadData];
       }
 }   
 
