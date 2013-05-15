@@ -52,7 +52,7 @@
     }
     if (self.layoutShouldHideCell) {
         if ([[NSNumber numberWithInt:indexPath.item] isEqualToNumber:self.layoutShouldHideCell]) {
-        [attributes setHidden:YES];
+        [attributes setAlpha:0.0];
         }
     }
        
@@ -72,7 +72,7 @@
         if (self.layoutShouldHideCell){
             if ([[NSNumber numberWithInt:cellAttributes.indexPath.item]
                  isEqualToNumber:self.layoutShouldHideCell]) {
-               [cellAttributes setHidden:YES];
+               [cellAttributes setAlpha:0.0];
             }
             
             }
@@ -82,16 +82,16 @@
 
 
 
-//- (UICollectionViewLayoutAttributes
-//   *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
-//{
-//    UICollectionViewLayoutAttributes* attributes = [self
-//                                                    layoutAttributesForItemAtIndexPath:itemIndexPath];
-//    attributes.alpha = 0.0;
-//    //CGSize size = [self collectionView].frame.size;
-//    //attributes.center = CGPointMake(size.width / 2.0, size.height / 2.0);
-//    return attributes;
-//}
+- (UICollectionViewLayoutAttributes
+   *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+{
+    UICollectionViewLayoutAttributes* attributes = [self
+                                                    layoutAttributesForItemAtIndexPath:itemIndexPath];
+    attributes.alpha = 0.0;
+    //CGSize size = [self collectionView].frame.size;
+    //attributes.center = CGPointMake(size.width / 2.0, size.height / 2.0);
+    return attributes;
+}
 
 
 

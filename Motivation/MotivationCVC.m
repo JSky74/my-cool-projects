@@ -250,7 +250,7 @@
         
         [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:NO]];
         
-        [self.motivationCollectionView removeLongPressGestureRecognizer];
+        //[self.motivationCollectionView removeLongPressGestureRecognizer];
 
         
     }

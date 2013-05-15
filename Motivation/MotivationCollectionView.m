@@ -50,6 +50,10 @@
     static NSIndexPath *indexToMoveTo;
     static NSIndexPath *currentIndexOfMovingProxy;
     static CGRect indexToMoveToFrame;
+    static NSIndexPath *indexToMoveFrom;
+    static CGPoint currentTouchLocation;
+    static NSString *currentCGPointValueString;
+    
     static BOOL firstTouch;
     
     if (longPress.state == UIGestureRecognizerStateBegan)
@@ -68,6 +72,7 @@
         
         [self addSubview:self.noteProxy];
         currentIndexOfMovingProxy = [self indexPathForCell:self.note];
+        indexToMoveFrom = currentIndexOfMovingProxy;
         indexToMoveTo = currentIndexOfMovingProxy;
         indexToMoveToFrame = self.note.frame;
         [self.note setHidden:YES];
@@ -88,22 +93,42 @@
             self.noteProxy.center = CGPointMake(touchPoint.x+offset.x, touchPoint.y+offset.y);
         }
         
-        NSIndexPath *indexToMoveFrom = currentIndexOfMovingProxy;
-        CGPoint currentTouchLocation = [longPress locationInView:self];
-        NSString *currentCGPointValueString = NSStringFromCGPoint(currentTouchLocation);
+        //NSIndexPath *indexToMoveFrom = currentIndexOfMovingProxy;
+        currentTouchLocation = [longPress locationInView:self];
+        currentCGPointValueString = NSStringFromCGPoint(currentTouchLocation);
         
         indexToMoveTo = [self indexPathForItemAtPoint:currentTouchLocation];
-     
-        //test that objects and keys are 2 before sending a notification otherwise CRASH! Klart.
-    
-        // ** AVOID SUBCLASING COLLECTION VIEW **! ///
-        
         if (indexToMoveTo && !([indexToMoveTo isEqual:indexToMoveFrom])) {
-        if (CGRectContainsRect(self.noteProxy.frame, [self cellForItemAtIndexPath:indexToMoveTo].frame)) {
+            if (CGRectContainsRect(self.noteProxy.frame, [self cellForItemAtIndexPath:indexToMoveTo].frame)) {
+                
+                NSArray *objects = [NSArray arrayWithObjects:currentCGPointValueString, indexToMoveFrom, nil];
+                NSArray *keys = [NSArray arrayWithObjects:@"CurrentCGPointValueString", @"IndexToMoveFrom", nil];
+                
+                if ([objects count] == 2 && [keys count] ==2) {
+                    
+                    indexToMoveToFrame = ([self cellForItemAtIndexPath:indexToMoveTo]).frame;
+                    [(ShakeLayout *)self.collectionViewLayout setLayoutShouldHideCell:[NSNumber numberWithInt:indexToMoveTo.item]];
+                    currentIndexOfMovingProxy = indexToMoveTo;
+                    
+                    //[[NSNotificationCenter defaultCenter] postNotificationName:@"UserWillChangeLayout" object:self userInfo:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
+                    
+                }
+            }
+        }
         
-            NSArray *objects = [NSArray arrayWithObjects:currentCGPointValueString, indexToMoveFrom, nil];
-            NSArray *keys = [NSArray arrayWithObjects:@"CurrentCGPointValueString", @"IndexToMoveFrom", nil];
-            
+
+        
+       
+}
+    
+    if (longPress.state ==UIGestureRecognizerStateEnded)
+    {
+        if (indexToMoveTo && !([indexToMoveTo isEqual:indexToMoveFrom])) {
+            if (CGRectContainsRect(self.noteProxy.frame, [self cellForItemAtIndexPath:indexToMoveTo].frame)) {
+                NSString *currentCGPointValueString = NSStringFromCGPoint(currentTouchLocation);
+                NSArray *objects = [NSArray arrayWithObjects:currentCGPointValueString, indexToMoveFrom, nil];
+                NSArray *keys = [NSArray arrayWithObjects:@"CurrentCGPointValueString", @"IndexToMoveFrom", nil];
+                
                 if ([objects count] == 2 && [keys count] ==2) {
                     
                     indexToMoveToFrame = ([self cellForItemAtIndexPath:indexToMoveTo]).frame;
@@ -111,15 +136,12 @@
                     currentIndexOfMovingProxy = indexToMoveTo;
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UserWillChangeLayout" object:self userInfo:[NSDictionary dictionaryWithObjects:objects forKeys:keys]];
-    
+                    
                 }
             }
-    }
-}
-    
-    if (longPress.state ==UIGestureRecognizerStateEnded)
-    {
-            
+        }
+        
+        
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             if (indexToMoveTo)
                 {
@@ -181,7 +203,7 @@
     NSArray* recognizers = [self gestureRecognizers];
     
     for (UIGestureRecognizer* aRecognizer in recognizers) {
-        if ([aRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+        if ([aRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
             if ([aRecognizer isEqual:self.longPressGesture]) {
                 [self removeGestureRecognizer:aRecognizer];
             }
