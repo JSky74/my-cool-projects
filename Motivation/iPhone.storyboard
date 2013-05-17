@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hk8-1u-UsV" customClass="MotivationCollectionView">
-                                <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="eon-Vh-VNw" customClass="ShakeLayout"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" reuseIdentifier="Note Cell" id="mdZ-IT-HZF" customClass="NoteCell">
@@ -24,17 +24,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view opaque="NO" clipsSubviews="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bFg-Kr-1st" customClass="CellLabel">
-                                                    <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="leading" secondItem="mdZ-IT-HZF" secondAttribute="leading" type="default" id="2nl-qB-GU2"/>
-                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="top" secondItem="mdZ-IT-HZF" secondAttribute="top" constant="5" id="3qj-RF-DBP"/>
-                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="trailing" secondItem="mdZ-IT-HZF" secondAttribute="trailing" type="default" id="F34-Hh-cKZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="bFg-Kr-1st" secondAttribute="bottom" constant="-5" id="lDo-GO-SZl"/>
+                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="bottom" secondItem="mdZ-IT-HZF" secondAttribute="bottom" type="default" id="4r6-lU-4jU"/>
+                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="top" secondItem="mdZ-IT-HZF" secondAttribute="top" type="default" id="6ZW-vx-gcJ"/>
+                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="leading" secondItem="mdZ-IT-HZF" secondAttribute="leading" type="default" id="TEK-ZU-A4g"/>
+                                            <constraint firstItem="bFg-Kr-1st" firstAttribute="trailing" secondItem="mdZ-IT-HZF" secondAttribute="trailing" type="default" id="gen-gW-dXH"/>
                                         </constraints>
                                         <size key="customSize" width="168" height="125"/>
                                         <connections>
@@ -43,11 +43,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="uVU-BL-SYT">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="uVU-BL-SYT">
                                 <items>
                                     <barButtonItem systemItem="compose" id="Uv9-Bw-Vkx">
                                         <connections>
-                                            <segue destination="7UW-b1-Rxd" kind="modal" modalTransitionStyle="partialCurl" id="CfR-4r-Uos"/>
+                                            <action selector="composeLandscape:" destination="YD5-bg-3HT" id="R1g-fR-lbr"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="iTZ-re-nQg"/>
@@ -66,8 +66,8 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="uVU-BL-SYT" firstAttribute="top" secondItem="hk8-1u-UsV" secondAttribute="bottom" type="default" id="Atb-XD-roz"/>
                             <constraint firstItem="hk8-1u-UsV" firstAttribute="top" secondItem="464-7a-Xi2" secondAttribute="top" type="default" id="Bex-lA-f3T"/>
+                            <constraint firstItem="uVU-BL-SYT" firstAttribute="top" secondItem="hk8-1u-UsV" secondAttribute="bottom" type="default" id="EQ5-f4-Ap4"/>
                             <constraint firstItem="hk8-1u-UsV" firstAttribute="trailing" secondItem="464-7a-Xi2" secondAttribute="trailing" type="default" id="ESS-8d-xGi"/>
                             <constraint firstItem="uVU-BL-SYT" firstAttribute="leading" secondItem="464-7a-Xi2" secondAttribute="leading" type="default" id="Tle-I3-vEq"/>
                             <constraint firstItem="uVU-BL-SYT" firstAttribute="trailing" secondItem="464-7a-Xi2" secondAttribute="trailing" type="default" id="ZT5-3h-poO"/>
@@ -83,11 +83,13 @@
                         <outlet property="motivationCollectionView" destination="hk8-1u-UsV" id="TPA-9f-g60"/>
                         <outlet property="trashButton" destination="Tft-bp-2P8" id="BI4-Ud-YcZ"/>
                         <segue destination="4On-15-OJT" kind="modal" identifier="setNote:" modalTransitionStyle="partialCurl" id="dcm-mD-As1"/>
+                        <segue destination="7UW-b1-Rxd" kind="modal" identifier="composePortrait" modalTransitionStyle="partialCurl" id="pkK-Vh-0jc"/>
+                        <segue destination="w37-L6-beg" kind="modal" identifier="composeLandscape" modalTransitionStyle="crossDissolve" id="fYP-2k-Hi6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cvv-NZ-NaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2083" y="-565"/>
+            <point key="canvasLocation" x="-2280" y="-694"/>
         </scene>
         <!--Show Note View Controller-->
         <scene sceneID="Wqc-ym-QA1">
@@ -187,7 +189,100 @@
             </objects>
             <point key="canvasLocation" x="-1569" y="-128"/>
         </scene>
+        <!--New Note View Controller-->
+        <scene sceneID="qg1-sB-NHG">
+            <objects>
+                <viewController wantsFullScreenLayout="YES" id="w37-L6-beg" customClass="NewNoteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dMx-Dx-BDs">
+                        <rect key="frame" x="0.0" y="20" width="568" height="300"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit ..." translatesAutoresizingMaskIntoConstraints="NO" id="06O-ev-35y">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="wle-MI-Big"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="06O-ev-35y" firstAttribute="trailing" secondItem="dMx-Dx-BDs" secondAttribute="trailing" type="default" id="A41-jt-rwa"/>
+                            <constraint firstItem="06O-ev-35y" firstAttribute="leading" secondItem="dMx-Dx-BDs" secondAttribute="leading" type="default" id="XFa-ET-r8O"/>
+                            <constraint firstItem="06O-ev-35y" firstAttribute="top" secondItem="dMx-Dx-BDs" secondAttribute="top" constant="13" id="Yse-AI-RD0"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DHe-6Y-HWj"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="noteText" destination="06O-ev-35y" id="rCh-7d-1Hh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2dS-Kx-iSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2306" y="149"/>
+        </scene>
     </scenes>
+    <classes>
+        <class className="CellLabel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CellLabel.h"/>
+        </class>
+        <class className="MotivationCVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MotivationCVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="composeBarButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="motivationCollectionView" candidateClass="MotivationCollectionView"/>
+                <relationship kind="outlet" name="trashButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MotivationCollectionView" superclassName="UICollectionView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MotivationCollectionView.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NewNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewNoteViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="noteText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NoteCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NoteCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="label" candidateClass="CellLabel"/>
+            </relationships>
+        </class>
+        <class className="NotesAbstractViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NotesAbstractViewController.h"/>
+        </class>
+        <class className="ShakeLayout" superclassName="UICollectionViewFlowLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShakeLayout.h"/>
+        </class>
+        <class className="ShowNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowNoteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="edit:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="undoLatestTextChangeButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="noteTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="undoButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

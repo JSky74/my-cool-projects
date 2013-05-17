@@ -60,9 +60,9 @@
     [self.image drawInRect:self.bounds];
     [self.textColor set];
     
-    CGRect newRect = CGRectMake(self.bounds.origin.x+OFFSET, self.bounds.origin.y+OFFSET, self.bounds.size.width-3*OFFSET, self.bounds.size.height-3*OFFSET);
+    CGRect newRect = CGRectMake(self.bounds.origin.x+[self offset], self.bounds.origin.y+[self offset], self.bounds.size.width-3*[self offset], self.bounds.size.height-3*[self offset]);
     // try to create labels and then add them to this wiew as a subview withouth using drawRect
-    [self.text drawInRect:newRect withFont:[UIFont fontWithName:self.fontName size:FONT_SIZE] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
+    [self.text drawInRect:newRect withFont:[UIFont fontWithName:self.fontName size:[self fontSize]] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
     
     if (self.selected) {
         
@@ -71,6 +71,33 @@
         [selected setLineWidth:2.0];
         [selected stroke];
     }
+}
+
+-(int) fontSize
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+//             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp))
+        {
+            return 8;
+        }
+    }
+    return FONT_SIZE;
+}
+-(int) offset
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+//             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp) )
+        {
+            return 4;
+        }
+    }
+    return OFFSET;
 }
 
 @end

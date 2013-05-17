@@ -45,7 +45,7 @@
 
 
 
--(void)handeLongPressGesture:(UILongPressGestureRecognizer *) longPress
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *) longPress
 {
     static NSIndexPath *indexToMoveTo;
     static NSIndexPath *currentIndexOfMovingProxy;
@@ -189,9 +189,9 @@
 -(UILongPressGestureRecognizer *)longPressGesture
 {
     if (!_longPressGesture) {
-     _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handeLongPressGesture:)];
+     _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
         [_longPressGesture setEnabled:YES];
-        [_longPressGesture setMinimumPressDuration:0.1];
+        [_longPressGesture setMinimumPressDuration:0.3];
     }
     return _longPressGesture;
 }

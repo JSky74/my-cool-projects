@@ -22,16 +22,15 @@
 
 @property (nonatomic, strong) NSArray *arrayOfNotesFromCoreData;
 @property (nonatomic, strong) Colors *color;
+
 @property BOOL userRequestedChange;
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *changeButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *composeBarButton;
+
 @property (strong, nonatomic) ShakeLayout* myLayout;
 @property (strong, nonatomic) NSNumber *cellsAreJiggling;
-@property (strong, nonatomic) NSMutableArray *tempArray;
-
-
 @property BOOL noteInserted;
 @end
 
@@ -40,23 +39,21 @@
 @implementation MotivationCVC
 
 
-
--(NSMutableArray *) tempArray
-{
-    if (_tempArray) {
-        _tempArray = [[NSMutableArray alloc] init];
-    }
-    return _tempArray;
-}
-
-#pragma mark  ------------------ delegate methodes collection view -------------------------------
+#pragma mark  ------------------ delegate methods collection view -------------------------------
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize sizeOfCell = CGSizeZero;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-         sizeOfCell = CGSizeMake(168, 125); //168,125
+         sizeOfCell = CGSizeMake(170, 110); //168,125
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+//             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp) )
+        {
+            sizeOfCell = CGSizeMake(95, 75);
+        }
     } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
     {
         sizeOfCell = CGSizeMake(190, 150);
@@ -65,10 +62,41 @@
     return sizeOfCell;
 }
 
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat minumumLineSpacing;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+//            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp) )
+        {
+            return minumumLineSpacing = 5;
+        }
+    }
+
+    
+    return 10;
+}
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(50.0, 50.0, 50.0, 30.0);
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+//             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp))
+        {
+            return UIEdgeInsetsMake(5, 10, 5, 10);
+        }
+    }
+
+    
+    
+    
+    
+    return UIEdgeInsetsMake(10.0, 10.0, 10.0, 30.0);
 }
 
 -(ShakeLayout *)myLayout
@@ -239,7 +267,7 @@
         self.composeBarButton.enabled = NO;
         [self.motivationCollectionView.visibleCells makeObjectsPerformSelector:@selector(setJigglingEnabled:) withObject:[NSNumber numberWithBool:YES]];
         [self setCellsAreJiggling:[NSNumber numberWithBool:YES]];
-        [self.motivationCollectionView addLongPressGestureRecognizer];
+        
        
     } else if(self.trashButton.enabled) {
         [self.composeBarButton setEnabled:YES];
@@ -280,7 +308,15 @@
 }   
 
 
-
+- (void)compose:(UIBarButtonItem *)sender {
+    
+    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+        [self performSegueWithIdentifier:@"composeLandscape" sender:self];
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+        [self performSegueWithIdentifier:@"composePortrait" sender:self];
+        
+    }
+}
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -293,7 +329,6 @@
         }
     }
 }
-
 
 
 
@@ -526,19 +561,22 @@ for (int i = 0; i < resultCount; i++) {
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    //[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    
     [self.iCloudQuery disableUpdates];
     [self.iCloudQuery stopQuery];
+    [super viewWillDisappear:animated];
 }
 
 
-
+#pragma mark --------------------------------- viewDidLoad ----------------------------------------
 
 
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.composeBarButton setAction:@selector(compose:)];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     while (!self.document.managedObjectContext) {
         NSLog(@"Document not ready");
     }
@@ -565,6 +603,17 @@ for (int i = 0; i < resultCount; i++) {
                                                object:self.document];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userWillChangeLayout:) name:@"UserWillChangeLayout" object:self.motivationCollectionView];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification object:nil queue:([NSOperationQueue mainQueue]) usingBlock:^(NSNotification *note) {
+        if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight ||
+             [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
+            [UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+            
+            [self.motivationCollectionView.collectionViewLayout invalidateLayout];
+            
+        }
+         
+     
+    }];
     
     BOOL started = [self.iCloudQuery startQuery];
     if (started)
@@ -579,17 +628,12 @@ for (int i = 0; i < resultCount; i++) {
   [self setCellsAreJiggling:[NSNumber numberWithBool:NO]];
   self.actionSheet.delegate  = self;
   self.trashButton.enabled = NO;
+  [self.motivationCollectionView addLongPressGestureRecognizer];  
   
   [self.document.managedObjectContext setStalenessInterval:0.0];
     
 }
 
--(void) panGestureDiscovered
-{
-    if (self.userRequestedChange) {
-        NSLog(@"Pan");
-    }
-}
 
 -(void) moveDocumentToCloud
 {
@@ -686,8 +730,13 @@ for (int i = 0; i < resultCount; i++) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"MyNotificationDocumentIsSaved"
                                                   object:self.document];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UserWillChangeLayout" object:self.motivationCollectionView];
-}
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"UserWillChangeLayout"
+                                                  object:self.motivationCollectionView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"UIDeviceOrientationDidChangeNotification"
+                                                  object:nil];
+ }
 
 
 

@@ -22,7 +22,6 @@
     self = [super init];
     if (self) {
         [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        [self setSectionInset:UIEdgeInsetsMake(50, 30, 50, 30)];
     }
     return self;
 }
