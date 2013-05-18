@@ -21,6 +21,7 @@
 			<string>American Typewriter</string>
 			<key>Titles</key>
 			<array>
+				<string>Helvetica</string>
 				<string>Zapfino</string>
 				<string>Chalkduster</string>
 				<string>American Typewriter</string>
@@ -28,6 +29,7 @@
 			</array>
 			<key>Values</key>
 			<array>
+				<string>Helvetica</string>
 				<string>Zapfino</string>
 				<string>Chalkduster</string>
 				<string>American Typewriter</string>

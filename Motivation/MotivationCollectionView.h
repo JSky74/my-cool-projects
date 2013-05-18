@@ -10,11 +10,9 @@
 
 @interface MotivationCollectionView : UICollectionView
 
-@property BOOL userWillStartLongPressGesture;
-
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;
 
 -(void) addLongPressGestureRecognizer;
--(void)removeLongPressGestureRecognizer;
+-(void) removeLongPressGestureRecognizer;
 
 @end

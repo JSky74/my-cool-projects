@@ -14,11 +14,7 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="m77-b9-s91">
                                 <items>
-                                    <barButtonItem systemItem="compose" id="BBL-RO-8Ad">
-                                        <connections>
-                                            <segue destination="huW-dF-XMs" kind="modal" modalTransitionStyle="partialCurl" id="zWG-to-U8O"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem systemItem="compose" id="BBL-RO-8Ad"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wHT-Wi-pSl"/>
                                     <barButtonItem systemItem="edit" id="I0F-Xa-hnE">
                                         <connections>
@@ -86,11 +82,14 @@
                         <outlet property="motivationCollectionView" destination="sdx-OT-MOC" id="VcN-4o-Sh0"/>
                         <outlet property="trashButton" destination="L4J-kl-gmw" id="2WV-rB-cjS"/>
                         <segue destination="7gm-Ts-FeL" kind="modal" identifier="setNote:" modalTransitionStyle="partialCurl" id="N7K-5v-ZLR"/>
+                        <segue destination="EPR-gJ-0Qa" kind="modal" identifier="setNoteLandscape:" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="mfO-4j-Ctz"/>
+                        <segue destination="9yu-8w-w8X" kind="modal" identifier="composeLandscape" modalPresentationStyle="pageSheet" modalTransitionStyle="flipHorizontal" id="77N-Rt-XeM"/>
+                        <segue destination="huW-dF-XMs" kind="modal" identifier="composePortrait" id="gaA-jP-ier"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5z-jT-Kfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1523" y="-766"/>
+            <point key="canvasLocation" x="-1442" y="-272"/>
         </scene>
         <!--Show Note View Controller-->
         <scene sceneID="jlY-Hr-d8d">
@@ -174,7 +173,171 @@
             </objects>
             <point key="canvasLocation" x="-535" y="-115"/>
         </scene>
+        <!--Show Note View Controller-->
+        <scene sceneID="4uq-VZ-zM2">
+            <objects>
+                <viewController id="EPR-gJ-0Qa" customClass="ShowNoteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rBg-xI-dzr">
+                        <rect key="frame" x="0.0" y="20" width="768" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum ..." translatesAutoresizingMaskIntoConstraints="NO" id="5Hi-rp-J6R">
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="654" id="zMK-4r-fae"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="nOL-1y-9za">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="Stg-Yb-MAx"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="done" systemItem="done" id="4t6-ms-cKg">
+                                        <connections>
+                                            <segue destination="7Gh-0G-dki" kind="unwind" unwindAction="saveNote:" id="EC4-CI-E2t"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="edit" id="Zw3-lE-19w">
+                                        <connections>
+                                            <action selector="edit:" destination="EPR-gJ-0Qa" id="fAF-bc-cre"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="arb-JG-jax"/>
+                                    <barButtonItem systemItem="undo" id="LA7-Sd-lj2">
+                                        <connections>
+                                            <action selector="undoLatestTextChangeButton:" destination="EPR-gJ-0Qa" id="3Af-FT-tU8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5Hi-rp-J6R" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CVN-Y0-WAm"/>
+                            <constraint firstItem="nOL-1y-9za" firstAttribute="leading" secondItem="rBg-xI-dzr" secondAttribute="leading" type="default" id="Cnu-Wg-oG9"/>
+                            <constraint firstItem="5Hi-rp-J6R" firstAttribute="leading" secondItem="rBg-xI-dzr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="IUY-2A-yNm"/>
+                            <constraint firstItem="nOL-1y-9za" firstAttribute="bottom" secondItem="rBg-xI-dzr" secondAttribute="bottom" type="default" id="Mzv-Nd-KA6"/>
+                            <constraint firstItem="5Hi-rp-J6R" firstAttribute="top" secondItem="rBg-xI-dzr" secondAttribute="top" constant="36" id="OMr-Ux-gOl"/>
+                            <constraint firstItem="nOL-1y-9za" firstAttribute="trailing" secondItem="rBg-xI-dzr" secondAttribute="trailing" type="default" id="iPK-uD-Rn1"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="noteTextView" destination="5Hi-rp-J6R" id="BeN-zT-oOb"/>
+                        <outlet property="undoButton" destination="LA7-Sd-lj2" id="Y1Q-qe-lqy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wgy-JD-7d7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7Gh-0G-dki" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1590" y="-1261"/>
+        </scene>
+        <!--New Note View Controller-->
+        <scene sceneID="neO-3B-2Z6">
+            <objects>
+                <viewController wantsFullScreenLayout="YES" id="9yu-8w-w8X" customClass="NewNoteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="74k-Sc-cwA">
+                        <rect key="frame" x="0.0" y="20" width="768" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit ..." translatesAutoresizingMaskIntoConstraints="NO" id="Rn8-PI-qNA">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="331" id="Slb-nD-i0i"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rn8-PI-qNA" firstAttribute="trailing" secondItem="74k-Sc-cwA" secondAttribute="trailing" type="default" id="CHU-sH-RbO"/>
+                            <constraint firstItem="Rn8-PI-qNA" firstAttribute="leading" secondItem="74k-Sc-cwA" secondAttribute="leading" type="default" id="QQY-Hx-lQo"/>
+                            <constraint firstItem="Rn8-PI-qNA" firstAttribute="top" secondItem="74k-Sc-cwA" secondAttribute="top" constant="13" id="wQq-Le-ndh"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tjT-6c-Khv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="noteText" destination="Rn8-PI-qNA" id="vhD-ml-TDZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqq-Rn-Gqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1542" y="1018"/>
+        </scene>
     </scenes>
+    <classes>
+        <class className="CellLabel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CellLabel.h"/>
+        </class>
+        <class className="MotivationCVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MotivationCVC.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="dismissNote:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="userRequestsChangeButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="composeBarButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="motivationCollectionView" candidateClass="MotivationCollectionView"/>
+                <relationship kind="outlet" name="trashButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MotivationCollectionView" superclassName="UICollectionView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MotivationCollectionView.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NewNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewNoteViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="noteText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NoteCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NoteCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="label" candidateClass="CellLabel"/>
+            </relationships>
+        </class>
+        <class className="NotesAbstractViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NotesAbstractViewController.h"/>
+        </class>
+        <class className="ShowNoteViewController" superclassName="NotesAbstractViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowNoteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="edit:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="undoLatestTextChangeButton:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="noteTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="undoButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

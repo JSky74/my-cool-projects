@@ -42,6 +42,11 @@
     [self invalidateLayout];
 }
 
+-(void)setIndexPathOfMovingCell:(NSIndexPath *)indexPathOfMovingCell
+{
+    _indexPathOfMovingCell = indexPathOfMovingCell;
+    [self invalidateLayout];
+}
 
 - (UICollectionViewLayoutAttributes *) layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -49,7 +54,10 @@
     if (self.shake) {
         [self applyTransformToLayoutAttributes:attributes];
     }
+    if ([indexPath isEqual:self.indexPathOfMovingCell])
+        [attributes setAlpha:0.1];
     if (self.layoutShouldHideCell) {
+       
         if ([[NSNumber numberWithInt:indexPath.item] isEqualToNumber:self.layoutShouldHideCell]) {
         [attributes setAlpha:0.0];
         }
@@ -68,7 +76,10 @@
         if (self.shake) {
             [self applyTransformToLayoutAttributes:cellAttributes];
         }
+        if ([cellAttributes.indexPath isEqual:self.indexPathOfMovingCell])
+            [cellAttributes setAlpha:0.1];
         if (self.layoutShouldHideCell){
+            
             if ([[NSNumber numberWithInt:cellAttributes.indexPath.item]
                  isEqualToNumber:self.layoutShouldHideCell]) {
                [cellAttributes setAlpha:0.0];

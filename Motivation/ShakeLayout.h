@@ -15,5 +15,7 @@
 @property (nonatomic) CATransform3D originalTransform;
 
 @property (nonatomic, strong) NSNumber *layoutShouldHideCell;
+@property (nonatomic, strong) NSIndexPath *indexPathOfMovingCell;
+
 
 @end

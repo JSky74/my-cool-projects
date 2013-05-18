@@ -16,33 +16,12 @@
 @property (nonatomic) CGPoint locationOfTouch;
 
 @property (strong, nonatomic) NSIndexPath *indexOfNote;
-@property (strong, nonatomic) CellLabel* noteProxy;
+@property (strong, nonatomic) CellLabel *noteProxy;
 @property (strong, nonatomic) NoteCell *note;
 
 @end
 
 @implementation MotivationCollectionView 
-
-@synthesize userWillStartLongPressGesture = _userWillStartLongPressGesture;
-
-
-
-
-
--(BOOL)userWillStartLongPressGesture
-{
-    _userWillStartLongPressGesture =  self.longPressGesture.enabled;
-    return _userWillStartLongPressGesture;
-}
--(void)setUserWillStartLongPressGesture:(BOOL)userWillStartLongPressGesture
-{
-    [self.longPressGesture setEnabled:userWillStartLongPressGesture];
-    _userWillStartLongPressGesture = userWillStartLongPressGesture;
-    NSLog(@"LongPress***%@", self.longPressGesture);
-}
-
-
-
 
 
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *) longPress
@@ -82,6 +61,7 @@
     
     if (longPress.state == UIGestureRecognizerStateChanged) {
         
+        [(ShakeLayout *)self.collectionViewLayout setIndexPathOfMovingCell:[self indexOfNote]];
         CGPoint touchPoint = [longPress locationInView:self];
         static CGPoint offset;
         if (firstTouch) {
@@ -154,6 +134,7 @@
             
         } completion:^(BOOL finished){
                             [(ShakeLayout *)self.collectionViewLayout setLayoutShouldHideCell:nil];
+                            [(ShakeLayout *)self.collectionViewLayout setIndexPathOfMovingCell:nil];
                             [self.noteProxy removeFromSuperview];
                             [self.note setHidden:NO];
                             [self.note enlargeCell:NO];
@@ -161,7 +142,7 @@
             
         }];
         
-     }
+    }
 
 }
 
@@ -169,28 +150,22 @@
 
 -(void) addLongPressGestureRecognizer
 {
-     
     NSArray* recognizers = [self gestureRecognizers];
-    
     // Make the default gesture recognizer wait until the custom one fails.
     for (UIGestureRecognizer* aRecognizer in recognizers) {
         if ([aRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
         {
             [aRecognizer requireGestureRecognizerToFail:self.longPressGesture];
-           
         }
     }
-    
     // Now add the gesture recognizer to the collection view.
     [self addGestureRecognizer:self.longPressGesture];  
-
 }
 
 -(UILongPressGestureRecognizer *)longPressGesture
 {
     if (!_longPressGesture) {
      _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-        [_longPressGesture setEnabled:YES];
         [_longPressGesture setMinimumPressDuration:0.3];
     }
     return _longPressGesture;
@@ -199,19 +174,14 @@
 
 -(void)removeLongPressGestureRecognizer
 {
- 
     NSArray* recognizers = [self gestureRecognizers];
-    
     for (UIGestureRecognizer* aRecognizer in recognizers) {
         if ([aRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
             if ([aRecognizer isEqual:self.longPressGesture]) {
                 [self removeGestureRecognizer:aRecognizer];
             }
     }
-    
 }
-
-
 
 - (id)initWithFrame:(CGRect)frame
 {

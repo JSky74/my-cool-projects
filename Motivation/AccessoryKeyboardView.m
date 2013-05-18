@@ -15,6 +15,7 @@
 
 @interface AccessoryKeyboardView ()
 @property (nonatomic) int buttonHeight;
+@property (nonatomic) CGFloat newWidth;
 @property (nonatomic, strong) NSArray* arrayOfColorChoosers;
 @end
 
@@ -43,12 +44,23 @@
     self = [super initWithFrame:accessFrame];
     if (self) {
         _pointerToViewController = pointer;
+        _newWidth = width;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                    initWithTarget:self  action:@selector(tapGesture:)]];
         [self setUp];
     }
     return self;
 }
 
-
+-(void)setNewWidth:(CGFloat)newWidth
+{
+    self.frame = CGRectMake(0.0, 0.0, newWidth, self.buttonHeight);
+    self.compButton = nil;
+    self.arrayOfColorChoosers = nil;
+    [self setNeedsDisplay];
+    [self setUp];
+    [self setNeedsDisplay];
+}
 
 -(UIButton *) compButton
 {
@@ -62,10 +74,7 @@
 
 -(void) setUp
 {
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc]
-                                initWithTarget:self  action:@selector(tapGesture:)]];
-    
-    
+
     self.backgroundColor = [UIColor whiteColor];
     CGFloat buttonWidth = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
     self.compButton.frame = CGRectMake(self.bounds.size.width-buttonWidth, 0, buttonWidth, self.buttonHeight);
@@ -89,7 +98,7 @@
 if (!_arrayOfColorChoosers)
 {
     CGFloat cellLength = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
-    NotesAbstractViewController *parentView = self.pointerToViewController;
+    NotesAbstractViewController *parentView = (NotesAbstractViewController *)self.pointerToViewController;
     NSMutableArray *mutableArrayOfColorChoosers  = [[NSMutableArray alloc] init];
     
     for (int i = 0; i<NUMBER_OF_COLORS; i++) {
@@ -150,8 +159,9 @@ completion:^(BOOL finished){
 
 -(void) dismissKeyboard
 {
-    [self.pointerToViewController doneEditing];
+    [(NotesAbstractViewController *)self.pointerToViewController doneEditing];
 }
+
 
 
 @end

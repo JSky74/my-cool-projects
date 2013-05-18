@@ -8,21 +8,18 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ShowNoteViewController.h"
-#import "NotesAbstractViewController.h"
+
 
 #define NUMBER_OF_COLORS 6
 #define NUMBER_OF_BUTTONS 1
 
 @interface AccessoryKeyboardView : UIView
 
--(id)initWithWidth:(CGFloat)width UIViewControllerPointer:(NotesAbstractViewController *) pointer;
-
+-(id)initWithWidth:(CGFloat)width UIViewControllerPointer:(UIViewController *) pointer;
+-(void)setNewWidth:(CGFloat)newWidth;
 
 @property  (nonatomic, strong) UIButton *compButton;
-@property  (nonatomic, strong) NotesAbstractViewController *pointerToViewController;
-
-
+@property  (nonatomic, weak) UIViewController *pointerToViewController; //?? 
 
 //UIViewController must implement doneEditing,  will send doneEditing: when done
-@end
+@end 

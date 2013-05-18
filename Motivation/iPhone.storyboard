@@ -85,11 +85,12 @@
                         <segue destination="4On-15-OJT" kind="modal" identifier="setNote:" modalTransitionStyle="partialCurl" id="dcm-mD-As1"/>
                         <segue destination="7UW-b1-Rxd" kind="modal" identifier="composePortrait" modalTransitionStyle="partialCurl" id="pkK-Vh-0jc"/>
                         <segue destination="w37-L6-beg" kind="modal" identifier="composeLandscape" modalTransitionStyle="crossDissolve" id="fYP-2k-Hi6"/>
+                        <segue destination="npV-DK-KMH" kind="modal" identifier="setNoteLandscape:" modalTransitionStyle="flipHorizontal" id="xVi-DV-mWY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cvv-NZ-NaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2280" y="-694"/>
+            <point key="canvasLocation" x="-2194" y="-505"/>
         </scene>
         <!--Show Note View Controller-->
         <scene sceneID="Wqc-ym-QA1">
@@ -102,16 +103,17 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum ..." translatesAutoresizingMaskIntoConstraints="NO" id="BLl-4C-rIp">
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="358" id="mUG-xO-4Fs"/>
+                                    <constraint firstAttribute="height" constant="493" id="QZG-cr-euh"/>
+                                    <constraint firstAttribute="width" constant="308" id="Xqt-jx-BbF"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="xqm-cs-PxU">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="xqm-cs-PxU">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="rC4-vp-ZoO"/>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="rC4-vp-ZoO"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="pageCurl" id="yf9-0c-5jo">
@@ -137,10 +139,9 @@
                         <constraints>
                             <constraint firstItem="xqm-cs-PxU" firstAttribute="leading" secondItem="0Ng-CW-eJU" secondAttribute="leading" type="default" id="HXn-0A-z6d"/>
                             <constraint firstItem="xqm-cs-PxU" firstAttribute="bottom" secondItem="0Ng-CW-eJU" secondAttribute="bottom" type="default" id="KVI-KL-q7B"/>
-                            <constraint firstItem="xqm-cs-PxU" firstAttribute="top" secondItem="BLl-4C-rIp" secondAttribute="bottom" type="default" id="MIy-5o-Vdw"/>
+                            <constraint firstAttribute="bottom" secondItem="BLl-4C-rIp" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="LLs-rh-Mqt"/>
                             <constraint firstItem="xqm-cs-PxU" firstAttribute="trailing" secondItem="0Ng-CW-eJU" secondAttribute="trailing" type="default" id="e61-hn-8tT"/>
-                            <constraint firstAttribute="trailing" secondItem="BLl-4C-rIp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="wIt-A6-m9k"/>
-                            <constraint firstItem="BLl-4C-rIp" firstAttribute="leading" secondItem="0Ng-CW-eJU" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xHp-IM-XRG"/>
+                            <constraint firstItem="BLl-4C-rIp" firstAttribute="centerX" secondItem="xqm-cs-PxU" secondAttribute="centerX" type="default" id="q1U-n6-euT"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -152,7 +153,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thn-5y-BBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="aDr-lW-wTe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1579" y="-810"/>
+            <point key="canvasLocation" x="-1562" y="-767"/>
         </scene>
         <!--New Note View Controller-->
         <scene sceneID="cs0-Fg-g85">
@@ -166,7 +167,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="322" id="iLj-ml-7SW"/>
-                                    <constraint firstAttribute="width" constant="263" id="wcs-ef-fXr"/>
+                                    <constraint firstAttribute="width" constant="302" id="uhv-wE-xa2"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="19"/>
@@ -175,7 +176,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vG9-Hm-SvH" firstAttribute="leading" secondItem="Epy-We-SSK" secondAttribute="leading" constant="31" id="etL-vV-zpT"/>
+                            <constraint firstItem="vG9-Hm-SvH" firstAttribute="centerX" secondItem="Epy-We-SSK" secondAttribute="centerX" type="default" id="efg-Uh-Dfh"/>
                             <constraint firstItem="vG9-Hm-SvH" firstAttribute="top" secondItem="Epy-We-SSK" secondAttribute="top" constant="104" id="lAI-Os-vfB"/>
                         </constraints>
                     </view>
@@ -224,7 +225,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dS-Kx-iSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2306" y="149"/>
+            <point key="canvasLocation" x="-2160" y="219"/>
+        </scene>
+        <!--Show Note View Controller-->
+        <scene sceneID="QTx-9s-8lv">
+            <objects>
+                <viewController id="npV-DK-KMH" customClass="ShowNoteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QD2-jd-fHp">
+                        <rect key="frame" x="0.0" y="20" width="568" height="300"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum ..." translatesAutoresizingMaskIntoConstraints="NO" id="jNE-UH-3iR">
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="249" id="aGd-Gd-3JZ"/>
+                                    <constraint firstAttribute="width" constant="550" id="bxt-4R-qUa"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="bTw-gF-78v">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="y7U-7T-FSL"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="pageCurl" id="3X1-mx-mDL">
+                                        <connections>
+                                            <segue destination="wRz-Kw-zVr" kind="unwind" unwindAction="saveNote:" id="Cbq-US-tHn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="edit" id="6eE-wx-7hi">
+                                        <connections>
+                                            <action selector="edit:" destination="npV-DK-KMH" id="WfA-AH-8rZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YRi-67-hxi"/>
+                                    <barButtonItem systemItem="undo" id="tGC-vE-Ufj">
+                                        <connections>
+                                            <action selector="undoLatestTextChangeButton:" destination="npV-DK-KMH" id="AGd-Yp-ZcM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bTw-gF-78v" firstAttribute="trailing" secondItem="QD2-jd-fHp" secondAttribute="trailing" type="default" id="31a-LW-Y5d"/>
+                            <constraint firstItem="jNE-UH-3iR" firstAttribute="top" secondItem="QD2-jd-fHp" secondAttribute="top" constant="7" id="NoI-6S-alq"/>
+                            <constraint firstItem="jNE-UH-3iR" firstAttribute="bottom" secondItem="bTw-gF-78v" secondAttribute="top" type="default" id="OS7-7e-dcb"/>
+                            <constraint firstItem="jNE-UH-3iR" firstAttribute="centerX" secondItem="bTw-gF-78v" secondAttribute="centerX" type="default" id="Ohp-cJ-RIb"/>
+                            <constraint firstItem="bTw-gF-78v" firstAttribute="leading" secondItem="QD2-jd-fHp" secondAttribute="leading" type="default" id="cNE-VK-EDi"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="noteTextView" destination="jNE-UH-3iR" id="TnZ-Op-ylN"/>
+                        <outlet property="undoButton" destination="tGC-vE-Ufj" id="0bm-cn-BtY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xkV-Pa-jc1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wRz-Kw-zVr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-2038" y="-1112"/>
         </scene>
     </scenes>
     <classes>
@@ -267,8 +333,6 @@
         <class className="ShowNoteViewController" superclassName="NotesAbstractViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowNoteViewController.h"/>
             <relationships>
-                <relationship kind="action" name="edit:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="undoLatestTextChangeButton:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="noteTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="undoButton" candidateClass="UIBarButtonItem"/>
             </relationships>

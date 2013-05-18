@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *noteText;
 @property (readwrite, nonatomic) NSString *typedText;
+@property (readwrite, nonatomic) NSString *colorKey;
 
 @end
 
@@ -29,6 +30,7 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [presentingViewController saveNote:thisSegue];
     }];
+
 }
 
 
@@ -41,11 +43,12 @@
 }
 
 
+
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.backgroundColor  = [self.colors.noteColors objectForKey:HEAVENLY_BLUE];
-
+    [self.view setBackgroundColor:[self.colors.noteColors objectForKey:HEAVENLY_BLUE]];
+    [self setColorKey:HEAVENLY_BLUE];
     
     self.noteText.textColor = [UIColor blackColor];
     
@@ -53,9 +56,17 @@
      self.noteText.text = nil;
      self.noteText.font = [UIFont fontWithName:
                            [Settings retrieveFromUserDefaults:@"font_preference"] size:17];
-    self.noteText.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width UIViewControllerPointer:self];
-    [self.noteText becomeFirstResponder];
+    
+    [self setAccessoryView:[[AccessoryKeyboardView alloc] initWithWidth:self.presentingViewController.view.bounds.size.width UIViewControllerPointer:self]];
 
+    self.noteText.inputAccessoryView = self.accessoryView;
+    [self.noteText becomeFirstResponder];
+  
+}
+
+-(BOOL) shouldAutorotate
+{
+    return NO;
 }
 
 @end

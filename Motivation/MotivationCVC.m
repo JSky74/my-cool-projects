@@ -56,7 +56,7 @@
         }
     } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
     {
-        sizeOfCell = CGSizeMake(190, 150);
+        sizeOfCell = CGSizeMake(190, 150); //190,150
     }
    
     return sizeOfCell;
@@ -86,17 +86,20 @@
         
         if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
-//             ([[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp))
         {
             return UIEdgeInsetsMake(5, 10, 5, 10);
         }
+     return UIEdgeInsetsMake(10.0, 10.0, 10.0, 30.0);
+    } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ||
+            ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft))
+        {
+            return UIEdgeInsetsMake(20, 20, 20, 10);
+        }
+    
     }
-
-    
-    
-    
-    
-    return UIEdgeInsetsMake(10.0, 10.0, 10.0, 30.0);
+    return UIEdgeInsetsMake(50.0, 50.0, 50.0, 30.0);;
 }
 
 -(ShakeLayout *)myLayout
@@ -110,7 +113,11 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.userRequestedChange){
-        [self performSegueWithIdentifier:@"setNote:" sender:indexPath];
+        if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft |
+            [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+            [self performSegueWithIdentifier:@"setNoteLandscape:" sender:indexPath];
+        } else {
+            [self performSegueWithIdentifier:@"setNote:" sender:indexPath];}
     }
     else if (self.userRequestedChange)
     {
@@ -310,7 +317,8 @@
 
 - (void)compose:(UIBarButtonItem *)sender {
     
-    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft |
+        [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
         [self performSegueWithIdentifier:@"composeLandscape" sender:self];
     } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
         [self performSegueWithIdentifier:@"composePortrait" sender:self];
@@ -321,8 +329,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+   
+    
+    
+    
     if ([sender isKindOfClass:[NSIndexPath class]]) {
-        if ([segue.identifier isEqualToString:@"setNote:"]) {
+        if ([segue.identifier isEqualToString:@"setNote:"] || [segue.identifier isEqualToString:@"setNoteLandscape:"] ) {
             if ([segue.destinationViewController isKindOfClass:[ShowNoteViewController class]]) {
                 [segue.destinationViewController performSelector:@selector(setNote:) withObject:[self.arrayOfNotesFromCoreData objectAtIndex:((NSIndexPath *)sender).item]];
             }
@@ -561,13 +573,16 @@ for (int i = 0; i < resultCount; i++) {
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    //[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    
     [self.iCloudQuery disableUpdates];
     [self.iCloudQuery stopQuery];
     [super viewWillDisappear:animated];
 }
 
+
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
 
 #pragma mark --------------------------------- viewDidLoad ----------------------------------------
 

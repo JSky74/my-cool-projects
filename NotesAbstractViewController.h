@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccessoryKeyboardView.h"
 #import "Colors.h"
+
 
 @interface NotesAbstractViewController : UIViewController
 
@@ -17,8 +19,10 @@
 - (void) colorChosen:(NSNumber *) indexOfColor;
 - (Colors *) colors;
 
+
 @property (readonly, nonatomic) NSString *colorKey;
- 
+@property (nonatomic, strong) AccessoryKeyboardView *accessoryView; 
+
 @end
 
 

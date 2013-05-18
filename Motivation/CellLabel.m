@@ -51,7 +51,7 @@
     [self setUp];
 }
 
-#define OFFSET 10.0
+#define OFFSET 7.0
 #define FONT_SIZE 13.0
 
 - (void)drawRect:(CGRect)rect

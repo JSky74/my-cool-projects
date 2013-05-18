@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet CellLabel *label;
 @property (nonatomic, strong) NSNumber *jigglingEnabled;
 
-
 -(void) enlargeCell:(BOOL) enlarge;
 
 @end

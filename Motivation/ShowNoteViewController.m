@@ -53,9 +53,9 @@
     self.noteTextView.textColor = [UIColor darkTextColor];
     self.noteTextView.backgroundColor = [self.colors.noteColors objectForKey:self.note.color];
     self.noteTextView.font = [UIFont fontWithName:[[NSUserDefaults standardUserDefaults] stringForKey:@"font_preference"] size:17];
-    self.noteTextView.inputAccessoryView = [[AccessoryKeyboardView alloc] initWithWidth:self.view.bounds.size.width UIViewControllerPointer:self];
     
 }
+
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -73,31 +73,34 @@
     [self editingWillHappen:NO];
     NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:EMPTY_SPACE];
     self.noteTextView.text = [self.noteTextView.text stringByTrimmingCharactersInSet:characterSet];
-    //[self addLeadingSpace];
     self.changedText =  self.noteTextView.text;
-    self.note.color = [[super.colors.noteColors allKeysForObject:self.view.backgroundColor] lastObject];
-    //[self removeLeadingSpace];
-    
+    self.note.color = [[super.colors.noteColors allKeysForObject:self.view.backgroundColor] lastObject];    
     [self.noteTextView resignFirstResponder];
+    
     MotivationCVC *presentingViewController = (MotivationCVC *)self.presentingViewController;
     ShowNoteViewController *thisSegue = (ShowNoteViewController *)presentingViewController.presentedViewController;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
             [presentingViewController saveNote:thisSegue];
         }];
+
 }
 
 
 -(void) editingWillHappen:(BOOL)editingNeeded
 {
     self.noteTextView.editable = editingNeeded;
+    
     if (editingNeeded)
     {
+        [self setAccessoryView:[[AccessoryKeyboardView alloc]
+                initWithWidth:self.presentingViewController.view.bounds.size.width
+                                                  UIViewControllerPointer:self]];
+        self.noteTextView.inputAccessoryView = self.accessoryView;
         [self.noteTextView becomeFirstResponder];
     } else
     {
         [self.noteTextView resignFirstResponder];
         [self addLeadingSpace];
-        //[self.noteTextView setSelectedRange:NSMakeRange(0, [LEADING_SPACE length])];
         [self.undoButton setEnabled:YES];
     }
 }
@@ -113,17 +116,24 @@
 
 -(void) addLeadingSpace
 {
+    if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait) {
     NSRange textBegining = NSMakeRange(0,0);
     self.noteTextView.text = [self.noteTextView.text stringByReplacingCharactersInRange:textBegining withString:LEADING_SPACE];
-    
+    }
 }
 
 -(void) removeLeadingSpace
 {
+    if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait) {
     NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:LEADING_SPACE];
     self.noteTextView.text = [self.noteTextView.text stringByTrimmingCharactersInSet:characterSet];
+    }
 }
 
+-(BOOL) shouldAutorotate
+{
+    return NO;
+}
 
 
 @end
