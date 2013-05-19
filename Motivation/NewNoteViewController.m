@@ -10,7 +10,8 @@
 #import "MotivationCVC.h"
 #import "Settings.h"
 #import "AccessoryKeyboardView.h"
-#import "ColorChooserKeyboardCell.h"
+
+
 @interface NewNoteViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *noteText;

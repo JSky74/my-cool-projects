@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NotesAbstractViewController.h"
-#import "NewNoteViewController.h"
 #import "Note.h"
 
 @interface ShowNoteViewController : NotesAbstractViewController

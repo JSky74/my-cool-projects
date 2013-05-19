@@ -10,18 +10,15 @@
 #import "AccessoryKeyboardView.h"
 #import "Colors.h"
 
-
 @interface NotesAbstractViewController : UIViewController
 
-- (void) doneEditing; //abstract
+@property (readonly, nonatomic) NSString *colorKey;
+@property (nonatomic, strong) AccessoryKeyboardView *accessoryView;
 
+- (void) doneEditing; //abstract
 - (void) setBackgroundColor:(NSNumber *)index;
 - (void) colorChosen:(NSNumber *) indexOfColor;
 - (Colors *) colors;
-
-
-@property (readonly, nonatomic) NSString *colorKey;
-@property (nonatomic, strong) AccessoryKeyboardView *accessoryView; 
 
 @end
 

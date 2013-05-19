@@ -7,12 +7,11 @@
 //
 
 #import "NotesAbstractViewController.h"
-#import "AccessoryKeyboardView.h"
 
 @interface NotesAbstractViewController ()
+
 @property (strong, nonatomic) Colors *colors;
 @property (readwrite, nonatomic) NSString *colorKey;
-
 
 @end
 
@@ -36,7 +35,7 @@
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self.accessoryView setNewWidth:self.view.frame.size.width];
+    [self.accessoryView setNewWidth:self.presentingViewController.view.bounds.size.width];
 }
 
 -(Colors *) colors

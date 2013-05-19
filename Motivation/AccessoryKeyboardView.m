@@ -11,32 +11,32 @@
 #import "ColorChooserKeyboardCell.h"
 #import "Colors.h"
 
-
-
 @interface AccessoryKeyboardView ()
 @property (nonatomic) int buttonHeight;
 @property (nonatomic) CGFloat newWidth;
 @property (nonatomic, strong) NSArray* arrayOfColorChoosers;
+@property  (nonatomic, strong) UIButton *compButton;
 @end
 
-
+#define IPHONE_BUTTON_HEIGHT 30
+#define IPAD_BUTTON_HEIGHT 40
 
 
 @implementation AccessoryKeyboardView
-
 
 - (int) buttonHeight
 {
     if (!_buttonHeight) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            _buttonHeight = 30;
+            _buttonHeight = IPHONE_BUTTON_HEIGHT;
         } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         {
-            _buttonHeight = 40;
+            _buttonHeight = IPAD_BUTTON_HEIGHT;
         }
     }
     return _buttonHeight;
 }
+
 
 -(id)initWithWidth:(CGFloat)width UIViewControllerPointer:(NotesAbstractViewController *)pointer
 {
@@ -45,6 +45,7 @@
     if (self) {
         _pointerToViewController = pointer;
         _newWidth = width;
+        self.clearsContextBeforeDrawing = YES;
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc]
                                     initWithTarget:self  action:@selector(tapGesture:)]];
         [self setUp];
@@ -52,15 +53,16 @@
     return self;
 }
 
--(void)setNewWidth:(CGFloat)newWidth
+
+-(void)setNewWidth:(CGFloat)presentingViewControllerViewBounds;
 {
-    self.frame = CGRectMake(0.0, 0.0, newWidth, self.buttonHeight);
+    self.frame = CGRectMake(0.0, 0.0, presentingViewControllerViewBounds, self.buttonHeight);
     self.compButton = nil;
     self.arrayOfColorChoosers = nil;
-    [self setNeedsDisplay];
     [self setUp];
     [self setNeedsDisplay];
 }
+
 
 -(UIButton *) compButton
 {
@@ -74,15 +76,12 @@
 
 -(void) setUp
 {
-
-    self.backgroundColor = [UIColor whiteColor];
     CGFloat buttonWidth = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
+ 
     self.compButton.frame = CGRectMake(self.bounds.size.width-buttonWidth, 0, buttonWidth, self.buttonHeight);
-
     [self.compButton setTitle: @"Done" forState:UIControlStateNormal];
     self.compButton.tintColor = [UIColor grayColor];
     [self.compButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
     [self.compButton addTarget:self action:@selector(resign)
         forControlEvents:UIControlEventTouchUpInside];
 
@@ -95,19 +94,19 @@
 
 -(NSArray *) arrayOfColorChoosers
 {
-if (!_arrayOfColorChoosers)
-{
-    CGFloat cellLength = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
-    NotesAbstractViewController *parentView = (NotesAbstractViewController *)self.pointerToViewController;
-    NSMutableArray *mutableArrayOfColorChoosers  = [[NSMutableArray alloc] init];
+    if (!_arrayOfColorChoosers)
+    {
+        CGFloat cellLength = self.frame.size.width / (NUMBER_OF_COLORS+NUMBER_OF_BUTTONS);
+        NSMutableArray *mutableArrayOfColorChoosers  = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i<NUMBER_OF_COLORS; i++) {
-    ColorChooserKeyboardCell *cell =    [[ColorChooserKeyboardCell alloc] initWithFrame:CGRectMake(self.frame.origin.x + i*cellLength, self.frame.origin.y, cellLength, self.buttonHeight) cellColor:[parentView.colors.colorsArray objectAtIndex:i]  height:self.buttonHeight index:i];
+        NotesAbstractViewController *parentView = (NotesAbstractViewController *)self.pointerToViewController;
+        for (int i = 0; i<NUMBER_OF_COLORS; i++) {
+            ColorChooserKeyboardCell *cell =    [[ColorChooserKeyboardCell alloc] initWithFrame:CGRectMake(self.frame.origin.x + i*cellLength, self.frame.origin.y, cellLength, self.buttonHeight) cellColor:[parentView.colors.colorsArray objectAtIndex:i]  height:self.buttonHeight index:i];
         [mutableArrayOfColorChoosers addObject:cell];
-        _arrayOfColorChoosers = mutableArrayOfColorChoosers;
         }
-}
-   return [_arrayOfColorChoosers copy];
+        _arrayOfColorChoosers = [mutableArrayOfColorChoosers copy];
+    }
+ return _arrayOfColorChoosers;
 }
 
 -(void) tapGesture:(UITapGestureRecognizer *) tapGesture
@@ -131,28 +130,21 @@ if (!_arrayOfColorChoosers)
     {
         CGPoint translatedOrigin = [self translateToParentView:view];
         [view setFrame:CGRectMake(translatedOrigin.x-10, translatedOrigin.y-10, view.frame.size.width+20, view.frame.size.height+20)];
-    }
-completion:^(BOOL finished){
-    
-    [UIView animateWithDuration:0.2 animations:^{
-    [view setFrame:originalRect];
-        NSNumber *objectIndex = [NSNumber numberWithInt:view.indexOfCell];
-        [self.pointerToViewController performSelector:@selector(setBackgroundColor:) withObject:objectIndex];
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:0.2 animations:^{
+        [view setFrame:originalRect];NSNumber *objectIndex = [NSNumber numberWithInt:view.indexOfCell];
+        [self.pointerToViewController performSelector:@selector(setBackgroundColor:) withObject:objectIndex];}];
     }];
-
-}];
 }
 
 -(CGPoint)translateToParentView:(UIView*)view
 {
     CGPoint origin = [self convertPoint:view.bounds.origin fromView:view];
-
     return origin;
 }
 
 -(void) resign //called by Done button
 {
-    
     [self performSelector:@selector(dismissKeyboard) withObject:self afterDelay:0.1];
 }
      
@@ -161,7 +153,6 @@ completion:^(BOOL finished){
 {
     [(NotesAbstractViewController *)self.pointerToViewController doneEditing];
 }
-
 
 
 @end

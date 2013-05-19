@@ -176,7 +176,6 @@
 		2C1B5417169659930006D731 /* Motivation */ = {
 			isa = PBXGroup;
 			children = (
-				2C41E930173160EA00839DEF /* Motivation.entitlements */,
 				2C7C5200170C021B001BB241 /* iPad.storyboard */,
 				2C58E80E171AFB5800B755CB /* iPhone.storyboard */,
 				2C7C51EF17083B43001BB241 /* MotivationCVC.h */,
@@ -207,6 +206,7 @@
 				2C593694171091960078BF0A /* Note Images */,
 				2C1B5420169659930006D731 /* MotivationAppDelegate.h */,
 				2C1B5421169659930006D731 /* MotivationAppDelegate.m */,
+				2C41E930173160EA00839DEF /* Motivation.entitlements */,
 				2C1B5419169659930006D731 /* Motivation-Info.plist */,
 				2C1B541D169659930006D731 /* main.m */,
 				2C1B541F169659930006D731 /* Motivation-Prefix.pch */,
