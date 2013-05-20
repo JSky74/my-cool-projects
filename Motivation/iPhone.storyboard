@@ -103,8 +103,8 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum ..." translatesAutoresizingMaskIntoConstraints="NO" id="BLl-4C-rIp">
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="493" id="QZG-cr-euh"/>
                                     <constraint firstAttribute="width" constant="308" id="Xqt-jx-BbF"/>
+                                    <constraint firstAttribute="height" constant="445" id="eWY-Ah-Q8x"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="19"/>
@@ -333,6 +333,8 @@
         <class className="ShowNoteViewController" superclassName="NotesAbstractViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShowNoteViewController.h"/>
             <relationships>
+                <relationship kind="action" name="edit:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="undoLatestTextChangeButton:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="noteTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="undoButton" candidateClass="UIBarButtonItem"/>
             </relationships>

@@ -9,8 +9,8 @@
 #import "DocumentManager.h"
 #import <CoreData/CoreData.h>
 
-#define DOCUMENT_NAME @"MotivationDocument4"
-#define TRANSACTION_LOG @"Transactions4"
+#define DOCUMENT_NAME @"MotivationDocument6"
+#define TRANSACTION_LOG @"Transactions6"
 
 @interface DocumentManager ()
 @end
@@ -27,27 +27,20 @@
     url = [url URLByAppendingPathComponent:DOCUMENT_NAME];
     UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
     
-    if ([[NSFileManager defaultManager] ubiquityIdentityToken]) //user is signed to iCloud
-    {
-        //ask user to enable iCloud, maybe a swtich in Settings to save that choice
-        [DocumentManager setPersistentStoreOptionsInDocument:document];
-    }
-    
-    
+    //ask user to enable iCloud, maybe a swtich in Settings to save that choice
+    [DocumentManager setPersistentStoreOptionsInDocument:document];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
-        // create
-        [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                if(success) { NSLog(@"####ManagedDocument created sucessfully");}
+        [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {   // create
+                if(success) { NSLog(@"ManagedDocument created sucessfully");}
             }];
     } else if (document.documentState == UIDocumentStateClosed) {
-        //open it
-            [document openWithCompletionHandler:^(BOOL success) {
+            [document openWithCompletionHandler:^(BOOL success) {  //open it
                 if (success) {
-                    NSLog(@"###ManagedDocument was closed, opened sucessfully");
-                    //[DocumentManager moveDocumentToCloud:document];
+                        NSLog(@"ManagedDocument was closed, opened sucessfully");
+                        //[DocumentManager moveDocumentToCloud:document];
                 }
-                    else  if (!success) { NSLog(@"###Failed to open a closed document");}
+                    else  if (!success) { NSLog(@"Failed to open a closed document");}
         }];
     }
     else if (document.documentState == UIDocumentStateInConflict)
@@ -76,11 +69,11 @@
     NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     url = [url URLByAppendingPathComponent:DOCUMENT_NAME];
     
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
-        NSLog(@"No document!");
-        //exit(1);
-    }
+    NSLog(@"%d", document.documentState);
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+//        NSLog(@"No document!");
+//        //exit(1);
+//    }
     if (document.documentState == UIDocumentStateNormal) {
          NSLog(@"Document is open/normal , trying to save ...");
          [document saveToURL:url forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
@@ -93,21 +86,21 @@
              saved = NO;
              NSLog(@"Failed to save the document");
              NSLog(@"Something is wrong");
+             [self useMotivationDocument];
          }}];
     }
-    
     return saved;
 }
 
-    //First two (migrate and mapping) are unrelated to iCloud, just migration schema
 +(void) setPersistentStoreOptionsInDocument:(UIManagedDocument *) document
 {
- 
-    
     NSMutableDictionary *options = [NSMutableDictionary dictionary];
     NSString *documentName;
     NSURL *sharedChangeLog;
-    
+    //First two (migrate and mapping) are unrelated to iCloud, just migration schema
+    [options setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
+    [options setObject:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
+
     if ([[NSFileManager defaultManager] fileExistsAtPath:[document.fileURL path]])
     {
         NSURL *metaData = [document.fileURL URLByAppendingPathComponent:@"DocumentMetadata.plist"];
@@ -116,35 +109,26 @@
         sharedChangeLog = [optionsDictionary objectForKey:NSPersistentStoreUbiquitousContentURLKey];
     }
     
-    [options setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
-    [options setObject:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
-    
     //iCloud related:
     if (!documentName) {
         documentName = [document.fileURL lastPathComponent];
     }
+    if ([[NSFileManager defaultManager] ubiquityIdentityToken]){
+        [options setObject:documentName forKey:NSPersistentStoreUbiquitousContentNameKey];
     
-    [options setObject:documentName forKey:NSPersistentStoreUbiquitousContentNameKey];
+        if (!sharedChangeLog) {
+            NSURL *ubiquityURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+            sharedChangeLog = [ubiquityURL URLByAppendingPathComponent:TRANSACTION_LOG];
+        }
     
-    if (!sharedChangeLog) {
-        NSURL *ubiquityURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        sharedChangeLog = [ubiquityURL URLByAppendingPathComponent:TRANSACTION_LOG];
+        [options setObject:sharedChangeLog forKey:NSPersistentStoreUbiquitousContentURLKey];
+        [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy]; //??
+        //OMG BUG IN THE API!
+        // https://devforums.apple.com/message/785558#785558
     }
     
-    [options setObject:sharedChangeLog forKey:NSPersistentStoreUbiquitousContentURLKey];
     
     [document setPersistentStoreOptions:options];
-    
-    //merge policy
-    [document.managedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy]; //??
-    //EXPERIMENTAL
-    //[document.managedObjectContext setRetainsRegisteredObjects:YES];
-    
-    //This policy merges conflicts between the persistent store’s version of the object and the current in-memory version, giving priority to in-memory changes.
-    
-    //OMG BUG IN THE API!
-    // https://devforums.apple.com/message/785558#785558
-    
 }
 
 

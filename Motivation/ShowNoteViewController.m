@@ -10,6 +10,7 @@
 #import "Colors.h"
 #import "AccessoryKeyboardView.h"
 #import "MotivationCVC.h"
+#import "Text.h"
 
 @interface ShowNoteViewController ()
 
@@ -49,7 +50,8 @@
     self.undoButton.enabled = NO;
     self.view.backgroundColor = [self.colors.noteColors objectForKey:self.note.color];
     
-    self.noteTextView.text = self.note.text;
+    //self.noteTextView.text = self.note.text;
+    self.noteTextView.attributedText = [Text attributedText:self.note.text withSize:15.0];
     self.noteTextView.textColor = [UIColor darkTextColor];
     self.noteTextView.backgroundColor = [self.colors.noteColors objectForKey:self.note.color];
     self.noteTextView.font = [UIFont fontWithName:[[NSUserDefaults standardUserDefaults] stringForKey:@"font_preference"] size:17];
@@ -57,11 +59,10 @@
 }
 
 
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self addLeadingSpace];
+    //[self addLeadingSpace];
 
 }
 

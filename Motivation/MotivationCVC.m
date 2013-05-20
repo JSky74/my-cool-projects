@@ -310,9 +310,20 @@
           [dataModel insertObject:noteToMove atIndex:newLocation.item];
           
           self.arrayOfNotesFromCoreData = [dataModel copy];
+          [self updateCustomOrder];
           [self.motivationCollectionView reloadData];
       }
 }   
+
+-(void) updateCustomOrder
+{
+    for (id note in self.arrayOfNotesFromCoreData) {
+        if ([note isKindOfClass:[Note class]]) {
+            ((Note *)note).customOrder = [NSNumber numberWithInt:[self.arrayOfNotesFromCoreData indexOfObject:note]];
+        }
+    }
+    [self saveDocument]; // just experimenting before 10th of June
+}
 
 
 - (void)compose:(UIBarButtonItem *)sender {
@@ -320,18 +331,17 @@
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft |
         [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
         [self performSegueWithIdentifier:@"composeLandscape" sender:self];
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait |
+               [UIDevice currentDevice].orientation == UIDeviceOrientationUnknown) {
         [self performSegueWithIdentifier:@"composePortrait" sender:self];
         
-    }
+    } else [self performSegueWithIdentifier:@"composePortrait" sender:self]; ////Kan detta räcka?
+    
 }
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   
-    
-    
     
     if ([sender isKindOfClass:[NSIndexPath class]]) {
         if ([segue.identifier isEqualToString:@"setNote:"] || [segue.identifier isEqualToString:@"setNoteLandscape:"] ) {
@@ -395,7 +405,11 @@
     if (self.document.managedObjectContext)
     {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+        NSArray *arrayWithSortDescriptors =@[[NSSortDescriptor sortDescriptorWithKey:@"customOrder" ascending:YES],
+                                             [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+        
+        request.sortDescriptors = arrayWithSortDescriptors;
+        
         request.predicate = [NSPredicate predicateWithFormat:@"archived == %@", [NSNumber numberWithBool:NO]];
         NSArray *fetch = [self.document.managedObjectContext executeFetchRequest:request error:&error];
         self.arrayOfNotesFromCoreData = fetch;
@@ -420,7 +434,6 @@
         ShowNoteViewController *noteVC = (ShowNoteViewController *)sender;
         //if (![noteVC.changedText isEqualToString:noteVC.note.text]) { WILL ALWAYS UPDATE TEXT - WORKS
             noteVC.note.text = noteVC.changedText;
-            //[self updateVisibleCells];
             }
         else if([sender isKindOfClass:[NewNoteViewController class]])
         {
@@ -428,20 +441,26 @@
             NewNoteViewController *newNote = (NewNoteViewController *)sender;
             
             if (newNote.typedText) {
+                [self.document.managedObjectContext performBlockAndWait:^{
             [Note noteWithContent:newNote.typedText
                         color:newNote.colorKey
                      archived:[NSNumber numberWithBool:NO]
            inManagedObjectContext:self.document.managedObjectContext];
             
-                [self setNoteInserted:YES];
+                    [self setNoteInserted:YES];
+                 }];
             }
-      }
+        }
+    
 [self saveDocument]; //should generate notification "MyNotificationDocumentSaved" and update UI
-}
+                     //changed it, overriding Notification now
+}                    //extensive savings cause errors.
 -(void)saveDocument
 {
-    [DocumentManager saveDocument:self.document];
+    [self.document updateChangeCount:UIDocumentChangeDone];
+    [self updateUI:nil];
 }
+
 
 
 
@@ -579,11 +598,6 @@ for (int i = 0; i < resultCount; i++) {
 }
 
 
--(BOOL)shouldAutorotate
-{
-    return YES;
-}
-
 #pragma mark --------------------------------- viewDidLoad ----------------------------------------
 
 
@@ -592,6 +606,7 @@ for (int i = 0; i < resultCount; i++) {
     [super viewDidLoad];
     [self.composeBarButton setAction:@selector(compose:)];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    
     while (!self.document.managedObjectContext) {
         NSLog(@"Document not ready");
     }

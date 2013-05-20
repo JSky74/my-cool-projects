@@ -12,5 +12,6 @@
 @interface MotivationAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) BOOL iCloudAvailable;
 
 @end

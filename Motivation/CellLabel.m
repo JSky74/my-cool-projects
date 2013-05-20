@@ -7,6 +7,7 @@
 //
 
 #import "CellLabel.h"
+#import "Text.h"
 #define CORNER_RADIUS 1.0
 
 @implementation CellLabel
@@ -62,7 +63,10 @@
     
     CGRect newRect = CGRectMake(self.bounds.origin.x+[self offset], self.bounds.origin.y+[self offset], self.bounds.size.width-3*[self offset], self.bounds.size.height-3*[self offset]);
     // try to create labels and then add them to this wiew as a subview withouth using drawRect
-    [self.text drawInRect:newRect withFont:[UIFont fontWithName:self.fontName size:[self fontSize]] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
+    [[Text attributedText:self.text withSize:13.0] drawWithRect:newRect options:(NSLineBreakByTruncatingTail | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) context:nil];
+    
+//     [self.text drawInRect:newRect withFont:[UIFont fontWithName:self.fontName size:[self fontSize]] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
+    
     
     if (self.selected) {
         

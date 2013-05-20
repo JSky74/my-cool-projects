@@ -84,7 +84,7 @@
                         <segue destination="7gm-Ts-FeL" kind="modal" identifier="setNote:" modalTransitionStyle="partialCurl" id="N7K-5v-ZLR"/>
                         <segue destination="EPR-gJ-0Qa" kind="modal" identifier="setNoteLandscape:" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="mfO-4j-Ctz"/>
                         <segue destination="9yu-8w-w8X" kind="modal" identifier="composeLandscape" modalPresentationStyle="pageSheet" modalTransitionStyle="flipHorizontal" id="77N-Rt-XeM"/>
-                        <segue destination="huW-dF-XMs" kind="modal" identifier="composePortrait" id="gaA-jP-ier"/>
+                        <segue destination="huW-dF-XMs" kind="modal" identifier="composePortrait" modalTransitionStyle="partialCurl" id="gaA-jP-ier"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5z-jT-Kfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -236,7 +236,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgy-JD-7d7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="7Gh-0G-dki" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1590" y="-1261"/>
+            <point key="canvasLocation" x="-1536" y="-1274"/>
         </scene>
         <!--New Note View Controller-->
         <scene sceneID="neO-3B-2Z6">

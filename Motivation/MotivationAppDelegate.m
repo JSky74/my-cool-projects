@@ -45,12 +45,12 @@
           
             if (currentToken != nil)
                 NSLog(@"User is signed in\n");
-       
+            [self setICloudAvailable:YES];
         }
         else
         {
             NSLog(@"iCloud is not available.\n");
-           
+            [self setICloudAvailable:NO];
             
         }
         });

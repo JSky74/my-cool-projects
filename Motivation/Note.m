@@ -2,7 +2,7 @@
 //  Note.m
 //  Motivation
 //
-//  Created by Jasko Demirovic on 2013-04-13.
+//  Created by Jasko Demirovic on 2013-05-19.
 //  Copyright (c) 2013 Jasko Demirovic. All rights reserved.
 //
 
@@ -15,5 +15,6 @@
 @dynamic color;
 @dynamic date;
 @dynamic text;
+@dynamic customOrder;
 
 @end

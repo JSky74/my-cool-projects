@@ -43,9 +43,10 @@
 		2C807057173AE41600BDF9BD /* Jiggling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C807056173AE41600BDF9BD /* Jiggling.m */; };
 		2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */; };
 		2C8F19F31740C26D00B2C1ED /* Transforms.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F19F21740C26D00B2C1ED /* Transforms.m */; };
+		2CD3BAA1174875A80011223B /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3BAA0174875A80011223B /* Note.m */; };
+		2CD3BAA4174973A50011223B /* Text.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3BAA3174973A50011223B /* Text.m */; };
 		2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */; };
 		2CD727751718B099006D42D7 /* SmallTileBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727741718B099006D42D7 /* SmallTileBackground.png */; };
-		2CD727781718BE4A006D42D7 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD727771718BE4A006D42D7 /* Note.m */; };
 		2CD7277A17190AD1006D42D7 /* RetinaIconTwoNotes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7277917190AD1006D42D7 /* RetinaIconTwoNotes.png */; };
 		2CD7277C17190D4A006D42D7 /* retinaIconTwoNotesIphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7277B17190D4A006D42D7 /* retinaIconTwoNotesIphone.png */; };
 		2CD727821719DF5B006D42D7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CD727811719DF5B006D42D7 /* Settings.bundle */; };
@@ -109,11 +110,13 @@
 		2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotivationCollectionView.m; sourceTree = "<group>"; };
 		2C8F19F11740C26D00B2C1ED /* Transforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transforms.h; sourceTree = "<group>"; };
 		2C8F19F21740C26D00B2C1ED /* Transforms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transforms.m; sourceTree = "<group>"; };
+		2CD3BA9F174875A80011223B /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		2CD3BAA0174875A80011223B /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		2CD3BAA2174973A50011223B /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
+		2CD3BAA3174973A50011223B /* Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Text.m; sourceTree = "<group>"; };
 		2CD476D9171F52DE0086338C /* AccessoryKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryKeyboardView.h; sourceTree = "<group>"; };
 		2CD476DA171F52DE0086338C /* AccessoryKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessoryKeyboardView.m; sourceTree = "<group>"; };
 		2CD727741718B099006D42D7 /* SmallTileBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallTileBackground.png; sourceTree = "<group>"; };
-		2CD727761718BE4A006D42D7 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		2CD727771718BE4A006D42D7 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		2CD7277917190AD1006D42D7 /* RetinaIconTwoNotes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RetinaIconTwoNotes.png; path = ../RetinaIconTwoNotes.png; sourceTree = "<group>"; };
 		2CD7277B17190D4A006D42D7 /* retinaIconTwoNotesIphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = retinaIconTwoNotesIphone.png; path = ../retinaIconTwoNotesIphone.png; sourceTree = "<group>"; };
 		2CD727811719DF5B006D42D7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 			children = (
 				2C7C5200170C021B001BB241 /* iPad.storyboard */,
 				2C58E80E171AFB5800B755CB /* iPhone.storyboard */,
+				2CD3BAA2174973A50011223B /* Text.h */,
+				2CD3BAA3174973A50011223B /* Text.m */,
 				2C7C51EF17083B43001BB241 /* MotivationCVC.h */,
 				2C8F19EE173E967700B2C1ED /* MotivationCollectionView.h */,
 				2C8F19EF173E967700B2C1ED /* MotivationCollectionView.m */,
@@ -283,10 +288,10 @@
 				2CFAFA2317074F3300FB670E /* DocumentManager.h */,
 				2CFAFA2417074F3300FB670E /* DocumentManager.m */,
 				2CFAFA161706F38500FB670E /* MotivationModel.xcdatamodeld */,
+				2CD3BA9F174875A80011223B /* Note.h */,
+				2CD3BAA0174875A80011223B /* Note.m */,
 				2CFAFA1F17074ED800FB670E /* Note+Create.h */,
 				2CFAFA2017074ED800FB670E /* Note+Create.m */,
-				2CD727761718BE4A006D42D7 /* Note.h */,
-				2CD727771718BE4A006D42D7 /* Note.m */,
 			);
 			name = "Data model";
 			sourceTree = "<group>";
@@ -387,7 +392,6 @@
 				2C7C51F917088DD9001BB241 /* Colors.m in Sources */,
 				2C7C51FF170B1002001BB241 /* ShowNoteViewController.m in Sources */,
 				2C59366F170F2AED0078BF0A /* CellLabel.m in Sources */,
-				2CD727781718BE4A006D42D7 /* Note.m in Sources */,
 				2CD7278B171A0143006D42D7 /* Settings.m in Sources */,
 				2CD476DB171F52DE0086338C /* AccessoryKeyboardView.m in Sources */,
 				2C4EC2F81737D6B000308A4F /* ColorChooserKeyboardCell.m in Sources */,
@@ -396,6 +400,8 @@
 				2C807057173AE41600BDF9BD /* Jiggling.m in Sources */,
 				2C8F19F0173E967700B2C1ED /* MotivationCollectionView.m in Sources */,
 				2C8F19F31740C26D00B2C1ED /* Transforms.m in Sources */,
+				2CD3BAA1174875A80011223B /* Note.m in Sources */,
+				2CD3BAA4174973A50011223B /* Text.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

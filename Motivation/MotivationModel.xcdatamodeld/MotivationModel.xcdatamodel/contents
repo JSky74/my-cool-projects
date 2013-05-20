@@ -3,10 +3,11 @@
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="archived" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="customOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-720" positionY="-4815" width="128" height="103"/>
+        <element name="Note" positionX="-720" positionY="-4815" width="128" height="118"/>
     </elements>
 </model>
